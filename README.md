@@ -66,17 +66,27 @@ sudo ./oled s
 
 ---
 
-Wire connection
+Wire connection for SPI
 
-OLED        Raspberry  
-Gnd         Gnd  
-VCC         3.3V  
-SCL         SCLK(Pin#23)  
-SDA         MOSI(Pin#19)  
-RST         GPIO2 *  
-D/C         GPIO4 *  
+OLED---Raspberry  
+Gnd----Gnd  
+VCC----3.3V  
+SCL----SCLK(Pin#23)  
+SDA----MOSI(Pin#19)  
+RST----GPIO2 *  
+D/C----GPIO4 *  
 
 (*)You can change any pin.  
+
+---
+
+Wire connection for I2C
+
+OLED---Raspberry  
+Gnd----Gnd  
+VCC----3.3V  
+SCK----SCL(Pin#5)  
+SDA----SDA(Pin#3)  
 
 ---
 
