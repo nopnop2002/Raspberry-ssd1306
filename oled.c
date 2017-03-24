@@ -209,6 +209,28 @@ if(OLED_DEBUG)printf("set/unset reverse to line [%d]\n",num);
     return 1;
   }
 
+  if ( strcmp(argv[1],"+L") == 0) {
+    memcpy(&sv.save[0],&sv.save[1],sizeof(SaveData));
+    memcpy(&sv.save[1],&sv.save[2],sizeof(SaveData));
+    memcpy(&sv.save[2],&sv.save[3],sizeof(SaveData));
+    memset(&sv.save[3],0,sizeof(SaveData));
+    fp = fopen(cpath,"w");
+    fwrite(&sv,sizeof(sv),1,fp);
+    fclose(fp);
+    return 1;
+  }
+
+  if ( strcmp(argv[1],"-L") == 0) {
+    memcpy(&sv.save[3],&sv.save[2],sizeof(SaveData));
+    memcpy(&sv.save[2],&sv.save[1],sizeof(SaveData));
+    memcpy(&sv.save[1],&sv.save[0],sizeof(SaveData));
+    memset(&sv.save[0],0,sizeof(SaveData));
+    fp = fopen(cpath,"w");
+    fwrite(&sv,sizeof(sv),1,fp);
+    fclose(fp);
+    return 1;
+  }
+
   if ( (strcmp(argv[1],"P1") == 0) ||
        (strcmp(argv[1],"P2") == 0) ||
        (strcmp(argv[1],"P3") == 0) ||
@@ -592,6 +614,8 @@ void usage(char *prog){
   printf("  -R n          unset reverse to line#n\n");
   printf("  +U n          set underline to line#n\n");
   printf("  -U n          unset underline to line#n\n");
+  printf("  +L            line scroll up\n");
+  printf("  -L            line scroll down\n");
   printf("  P1 n          set start colum n to line#1\n");
   printf("  P2 n          set start colum n to line#2\n");
   printf("  P3 n          set start colum n to line#3\n");

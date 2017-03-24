@@ -21,6 +21,8 @@ SPI/I2Cどちらのインターフェースにも対応しています。
 -R n : n行目の反転を解除  
 +U n : n行目をアンダーライン付きで表示  
 -U n : n行目のアンダーラインを解除  
++L   : 1行分スクロールアップ  
+-L   : 1行分スクロールダウン  
 P1 n : 1行目の表示開始位置をn文字目に設定  
 P2 n : 2行目の表示開始位置をn文字目に設定  
 P3 n : 3行目の表示開始位置をn文字目に設定  
@@ -48,6 +50,8 @@ Command line parameters:
 -R n : Unset inverse mode #n Line  
 +U n : Set underline mode #n Line  
 -U n : Unset underline mode #n Line  
++L   : Scroll Up 1Line  
+-L   : Scroll Down 1Line  
 P1 n : Set start colum n to line#1  
 P2 n : Set start colum n to line#2  
 P3 n : Set start colum n to line#3  
