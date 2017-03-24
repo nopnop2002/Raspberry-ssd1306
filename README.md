@@ -98,7 +98,7 @@ Install for SPI
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -DSPI  
-sh ./test.sh  
+bash ./test.sh  
 
 ---
 
@@ -106,7 +106,7 @@ Install for I2C
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -DI2C  
-sh ./test.sh  
+bash ./test.sh  
 
 ---
 
