@@ -370,12 +370,7 @@ Draw UTF8 character on SSD1306
 
 int drawUTF8Char(FontxFile *fx, int x,int y,uint8_t *utf8,uint8_t reverse,
                  uint8_t enhance){
-  unsigned char fonts[32]; // font pattern
-  unsigned char strJIS[3] = {0};
   uint16_t sjis;
-  uint8_t bitmap[128];
-  unsigned char pw, ph;
-  bool rc;
 
   // convert UTF8 to SJIS
   sjis = UTF2SJIS(utf8);
