@@ -112,7 +112,7 @@ sh ./test.sh
 
 ![oled-1](https://cloud.githubusercontent.com/assets/6020549/24071131/782737a8-0c0e-11e7-9312-44ec00312f52.JPG)
 
-![oled-2](https://cloud.githubusercontent.com/assets/6020549/24125314/71765782-0e0b-11e7-82b6-593d91cab8e4.jpg)
+![oled-2](https://cloud.githubusercontent.com/assets/6020549/24293142/b6cb6334-10d3-11e7-9439-1f6993341606.jpg)
 
 ![oled-4](https://cloud.githubusercontent.com/assets/6020549/24076582/e037998c-0c77-11e7-9e48-525e27c478a3.JPG)
 
@@ -120,8 +120,7 @@ Line1-2 : External Font
 Line3-4 : Internal Font  
 
 
-![oled-5](https://cloud.githubusercontent.com/assets/6020549/24076875/c9c2c700-0c7f-11e7-8c0d-e000dcdff05e.JPG)
-
+![oled-5](https://cloud.githubusercontent.com/assets/6020549/24293214/f627fefc-10d3-11e7-9304-bcfd58d59d92.JPG)
 
 ---
 
