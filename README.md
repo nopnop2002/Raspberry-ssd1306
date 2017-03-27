@@ -3,6 +3,7 @@ ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 
 128 X 64のOLEDをコマンドラインから操作できるツールです。  
 SPI/I2Cどちらのインターフェースにも対応しています。  
+SPIはハードウェアSPI/ソフトウェアSPIのどちらも使うことができます。
 
 実行時の引数の指定は以下の通りです。  
 +1   : 1行目に表示する文字の指定(外部フォントで表示）  
@@ -70,13 +71,27 @@ sudo ./oled s
 
 ---
 
-Wire connection for SPI
+Wire connection for Hardware SPI
 
 OLED---Raspberry  
 Gnd----Gnd  
 VCC----3.3V  
 SCL----SCLK(Pin#23)  
 SDA----MOSI(Pin#19)  
+RST----GPIO2 *  
+D/C----GPIO4 *  
+
+(*)You can change any pin.  
+
+---
+
+Wire connection for Software SPI
+
+OLED---Raspberry  
+Gnd----Gnd  
+VCC----3.3V  
+SCL----GPIO11 *  
+SDA----GPIO10 *  
 RST----GPIO2 *  
 D/C----GPIO4 *  
 
@@ -94,10 +109,18 @@ SDA----SDA(Pin#3)
 
 ---
 
-Install for SPI  
+Install for Hardware SPI  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -DSPI  
+bash ./test.sh  
+
+---
+
+Install for Software SPI  
+git clone https://github.com/nopnop2002/ssd1306_rpi.git  
+cd ssd1306_rpi/  
+cc -o oled oled.c fontx.c -lwiringPi -DSOFT_SPI  
 bash ./test.sh  
 
 ---
