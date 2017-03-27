@@ -23,7 +23,7 @@
  RST    --- GPIO2(Pin#3) (You can use Any Pin)
  DC     --- GPIO4(Pin#7) (You can use Any Pin)
 
- i2c interface
+ hardware i2c interface
  cc -o oled oled.c fontx.c -lwiringPi -DI2C
  SSD1606   RPI
  --------------
@@ -31,6 +31,16 @@
  VCC    --- 3.3V
  SCK    --- SCL(Pin#5)
  SDA    --- SDA(Pin#3)
+
+ software i2c interface
+ cc -o oled oled.c fontx.c soft_i2c.c -lwiringPi -DSOFT_I2C
+ SSD1606   RPI
+ --------------
+ GND    --- Gnd
+ VCC    --- 3.3V
+ SCK    --- GPIO8(Pin#24) (You can use Any Pin)
+ SDA    --- GPIO7(Pin#26) (You can use Any Pin)
+
 
 */
 
@@ -46,17 +56,31 @@
 #include <wiringPiI2C.h>
 #include <wiringShift.h>
 #include "fontx.h"
+#ifdef SOFT_I2C
+#include "soft_i2c.h"
+#endif
 
-#define MOSI 12 // You can change
-#define SCLK 14 // You can change
+// Hardware/Software SPI
 #define RST  8  // You can change
 #define DC   7  // You can change
 
-//#define BITBANG    1
-//#define SHIFTOUT   2
+// Software SPI
+#define MOSI 12 // You can change
+#define SCLK 14 // You can change
+
+// Hardware I2C
+#define I2C_ADDRESS        0x3C
+int i2cd;
+
+#ifdef SOFT_I2C
+// Software I2C
+#define SSCL 10 // You can change
+#define SSDA 11 // You can change
+i2c_t i2ct;
+#endif
+
 #define _BV(bit) (1<<(bit))
 
-#define I2C_ADDRESS        0x3C
 
 #define SSD1306_DEBUG 0
 #define OLED_DEBUG 0
@@ -82,7 +106,8 @@ unsigned char frame[1024]; // frame buffer
 
 void init_hardware_spi(void);
 void init_software_spi(void);
-void init_i2c(uint8_t i2caddr);
+void init_hardware_i2c(uint8_t i2caddr);
+void init_software_i2c(uint8_t i2caddr);
 int drawChar(int x,int y,unsigned char chr,uint8_t reverse,uint8_t enhance);
 int drawString(int x ,int y,unsigned char *str,uint8_t reverse,uint8_t enhance);
 int drawSJISChar(FontxFile *fx,int x,int y,uint16_t sjis,uint8_t reverse,
@@ -93,11 +118,11 @@ int drawUTF8String(FontxFile *fx,int x,int y,unsigned char *utf8,
                    uint8_t reverse,uint8_t enhance);
 void show_hardware_spi(void);
 void show_software_spi(void);
-void show_i2c(void);
+void show_hardware_i2c(void);
+void show_software_i2c(uint8_t i2caddr);
 void usage(char *prog);
 void DumpSaveFrame(SaveFrame hoge);
 
-int i2cd;
 
 int main(int argc, char **argv){
   int i,j,k;
@@ -291,7 +316,10 @@ if(OLED_DEBUG)printf("show dislay\n");
     init_software_spi();
 #endif
 #ifdef I2C
-    init_i2c(I2C_ADDRESS);
+    init_hardware_i2c(I2C_ADDRESS);
+#endif
+#ifdef SOFT_I2C
+    init_software_i2c(I2C_ADDRESS);
 #endif
     int y;
     for (num=0;num<4;num++) {
@@ -315,7 +343,10 @@ if(OLED_DEBUG)printf("show dislay\n");
     show_software_spi();	
 #endif
 #ifdef I2C
-    show_i2c();	
+    show_hardware_i2c();	
+#endif
+#ifdef SOFT_I2C
+    show_software_i2c(I2C_ADDRESS);	
 #endif
   }
 
@@ -325,6 +356,7 @@ if(OLED_DEBUG)printf("show dislay\n");
 }
 
 
+#ifdef SPI
 /*
 Initialize SSD1306 (hardware spi)
 */
@@ -351,9 +383,10 @@ void init_hardware_spi(void){
   digitalWrite(RST,  HIGH) ;
   digitalWrite(DC, LOW);
   wiringPiSPIDataRW(0, command, 28);
-
 }
+#endif
 
+#ifdef SOFT_SPI
 /*
 Initialize SSD1306 (software spi)
 */
@@ -376,24 +409,23 @@ void init_software_spi(void){
   pinMode (RST, OUTPUT) ;
   pinMode (MOSI, OUTPUT) ;
   pinMode (SCLK, OUTPUT) ;
-//  wiringPiSPISetup(0, 32*1000*1000);
   digitalWrite(RST,  LOW) ;
   delay(50);
   digitalWrite(RST,  HIGH) ;
   digitalWrite(DC, LOW);
-//  wiringPiSPIDataRW(0, command, 28);
   for(byte=0;byte<28;byte++) {
     shiftOut(MOSI, SCLK, MSBFIRST, command[byte]);
   }
-
 }
+#endif
 
 
+#ifdef I2C
 /*
-Initialize SSD1306 (i2c)
+Initialize SSD1306 (hardware i2c)
 */
 
-void init_i2c(uint8_t i2caddr){
+void init_hardware_i2c(uint8_t i2caddr){
   int byte;
   unsigned char command[] = {
     0xAE, 0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
@@ -407,13 +439,46 @@ void init_i2c(uint8_t i2caddr){
   }
 	
   i2cd = wiringPiI2CSetup(i2caddr);
+  unsigned int control = 0x00;    // Co = 0, D/C = 0
   int i;
   for(i=0;i<sizeof(command);i++) {
-    unsigned int control = 0x00;    // Co = 0, D/C = 0
     wiringPiI2CWriteReg8(i2cd, control, command[i]);
   }
-
 }
+#endif
+
+
+#ifdef SOFT_I2C
+/*
+Initialize SSD1306 (software i2c)
+*/
+
+void init_software_i2c(uint8_t i2caddr){
+  int byte;
+  unsigned char command[] = {
+    0xAE, 0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
+    0xA6, 0xD5, 0x80, 0xDA, 0x12, 0x81, 0x00, 0xB0,
+    0xA4, 0xDB, 0x40, 0x20, 0x00, 0x00, 0x10, 0x8D,
+    0x14, 0x2E, 0xA6, 0xAF 
+  };
+
+  for(byte=0;byte<1024;byte++){
+    frame[byte] = 0x00;
+  }
+	
+  wiringPiSetup();
+  i2ct = i2c_init(SSCL,SSDA);
+  i2c_start(i2ct);
+  unsigned int control = 0x00;    // Co = 0, D/C = 0
+  i2c_send_byte(i2ct, i2caddr << 1 | I2C_WRITE);
+  i2c_send_byte(i2ct, control);
+  int i;
+  for(i=0;i<sizeof(command);i++) {
+    i2c_send_byte(i2ct, command[i]);
+  }
+  i2c_stop(i2ct);
+}
+#endif
 
 /*
 Draw SJIS character on SSD1306
@@ -631,6 +696,7 @@ if(SSD1306_DEBUG)  printf("%d\n",strlen(str));
   return y;
 }
 
+#ifdef SPI
 /*
 Show frame buffer to SSD1306 (spi)
 */
@@ -639,7 +705,9 @@ void show_hardware_spi(void){
   digitalWrite(DC,  HIGH);
   wiringPiSPIDataRW(0, frame, 1024);
 }
+#endif
 
+#ifdef SOFT_SPI
 /*
 Show frame buffer to SSD1306 (software spi)
 */
@@ -652,17 +720,37 @@ void show_software_spi(void){
     shiftOut(MOSI, SCLK, MSBFIRST, frame[byte]);
   }
 }
+#endif
 
+#ifdef I2C
 /*
-Show frame buffer to SSD1306 (i2c)
+Show frame buffer to SSD1306 (hardware i2c)
 */
 
-void show_i2c(void){
+void show_hardware_i2c(void){
   int i;
   for (i = 0; i < 1024; i++) {
     wiringPiI2CWriteReg8(i2cd, 0x40, frame[i]);
   }
 }
+#endif
+
+#ifdef SOFT_I2C
+/*
+Show frame buffer to SSD1306 (software i2c)
+*/
+
+void show_software_i2c(uint8_t i2caddr){
+  int i;
+  i2c_start(i2ct);
+  i2c_send_byte(i2ct, i2caddr << 1 | I2C_WRITE);
+  i2c_send_byte(i2ct, 0x40);
+  for (i = 0; i < 1024; i++) {
+    i2c_send_byte(i2ct, frame[i]);
+  }
+  i2c_stop(i2ct);
+}
+#endif
 
 
 /*

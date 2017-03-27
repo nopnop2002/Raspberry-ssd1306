@@ -4,6 +4,7 @@ ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 128 X 64のOLEDをコマンドラインから操作できるツールです。  
 SPI/I2Cどちらのインターフェースにも対応しています。  
 SPIはハードウェアSPI/ソフトウェアSPIのどちらも使うことができます。
+I2CもハードウェアI2C/ソフトウェアI2Cのどちらも使うことができます。
 
 実行時の引数の指定は以下の通りです。  
 +1   : 1行目に表示する文字の指定(外部フォントで表示）  
@@ -34,6 +35,10 @@ s    : 表示を反映
 ---
 
 You can operate from command line.  
+It can use Hardware-SPI/Software-SPI/Hardware-I2C/Software-I2C  
+Software-I2C Libray is here  
+https://github.com/electronicayciencia/wPi_soft_i2c  
+
 Command line parameters:  
 +1 String : String for #1 line(with External Font)  
 +2 String : String for #2 line(with External Font)  
@@ -99,13 +104,25 @@ D/C----GPIO4 *
 
 ---
 
-Wire connection for I2C
+Wire connection for Hardware I2C
 
 OLED---Raspberry  
 Gnd----Gnd  
 VCC----3.3V  
 SCK----SCL(Pin#5)  
 SDA----SDA(Pin#3)  
+
+---
+
+Wire connection for Software I2C
+
+OLED---Raspberry  
+Gnd----Gnd  
+VCC----3.3V  
+SCK----GPIO8 *  
+SDA----GPIO7 *  
+
+(*)You can change any pin.  
 
 ---
 
@@ -125,10 +142,20 @@ bash ./test.sh
 
 ---
 
-Install for I2C  
+Install for Hardware I2C  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -DI2C  
+bash ./test.sh  
+
+---
+
+Install for Software I2C  
+git clone https://github.com/nopnop2002/ssd1306_rpi.git  
+git clone https://github.com/electronicayciencia/wPi_soft_i2c  
+cd ssd1306_rpi/  
+cp ../wPi_soft_i2c/soft_i2c.* ./  
+cc -o oled oled.c fontx.c soft_i2c.c -lwiringPi -DSOFT_I2C  
 bash ./test.sh  
 
 ---
