@@ -35,7 +35,7 @@ s    : •\Ž¦‚ð”½‰f
 ---
 
 You can operate from command line.  
-It can use Hardware-SPI/Software-SPI/Hardware-I2C/Software-I2C  
+You can choose Hardware-SPI/Software-SPI/Hardware-I2C/Software-I2C Interface.  
 Software-I2C Libray is here  
 https://github.com/electronicayciencia/wPi_soft_i2c  
 
