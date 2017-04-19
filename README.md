@@ -129,7 +129,7 @@ bash ./test.sh
 
 ![oled-1](https://cloud.githubusercontent.com/assets/6020549/24071131/782737a8-0c0e-11e7-9312-44ec00312f52.JPG)
 
-![oled-2](https://cloud.githubusercontent.com/assets/6020549/24293142/b6cb6334-10d3-11e7-9439-1f6993341606.jpg)
+![oled-2](https://cloud.githubusercontent.com/assets/6020549/25184287/f9945e38-2554-11e7-9075-e63d90b4a3a2.jpg)
 
 ![oled-4](https://cloud.githubusercontent.com/assets/6020549/24076582/e037998c-0c77-11e7-9e48-525e27c478a3.JPG)
 
