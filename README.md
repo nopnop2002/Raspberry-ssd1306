@@ -1,39 +1,6 @@
 # ssd1306_rpi
 ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 
-128 X 64のOLEDをコマンドラインから操作できるツールです。  
-SPI/I2Cどちらのインターフェースにも対応しています。  
-SPIはハードウェアSPI/ソフトウェアSPIのどちらも使うことができます。
-I2CもハードウェアI2C/ソフトウェアI2Cのどちらも使うことができます。
-
-実行時の引数の指定は以下の通りです。  
-+1   : 1行目に表示する文字の指定(外部フォントで表示）  
-+2   : 2行目に表示する文字の指定(外部フォントで表示）  
-+3   : 3行目に表示する文字の指定(外部フォントで表示）  
-+4   : 4行目に表示する文字の指定(外部フォントで表示）  
-+a   : 1行目に表示する文字の指定(内部フォントで表示）  
-+b   : 2行目に表示する文字の指定(内部フォントで表示）  
-+c   : 3行目に表示する文字の指定(内部フォントで表示）  
-+d   : 4行目に表示する文字の指定(内部フォントで表示）  
--1   : 1行目の文字を削除  
--2   : 2行目の文字を削除  
--3   : 3行目の文字を削除  
--4   : 4行目の文字を削除  
-+R n : n行目を反転で表示  
--R n : n行目の反転を解除  
-+U n : n行目をアンダーライン付きで表示  
--U n : n行目のアンダーラインを解除  
-+L   : 1行分スクロールアップ  
--L   : 1行分スクロールダウン  
-P1 n : 1行目の表示開始位置をn文字目に設定  
-P2 n : 2行目の表示開始位置をn文字目に設定  
-P3 n : 3行目の表示開始位置をn文字目に設定  
-P4 n : 4行目の表示開始位置をn文字目に設定  
-c    : 全ての文字を削除  
-s    : 表示を反映  
-
----
-
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/Hardware-I2C/Software-I2C Interface.  
 Software-I2C Libray is here. Thank you for usefull library.  
@@ -62,7 +29,7 @@ P1 n : Set start colum n to line#1
 P2 n : Set start colum n to line#2  
 P3 n : Set start colum n to line#3  
 P4 n : Set start colum n to line#4  
-c  : delete all string  
+r  : remove all string  
 s  : show display  
 
 You can use within script.  

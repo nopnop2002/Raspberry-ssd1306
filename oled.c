@@ -18,12 +18,12 @@
  --------------
  GND    --- Gnd
  VCC    --- 3.3V
- SCL    --- GPIO11(Pin#23) (You can use Any Pin)
- SDA    --- GPIO10(Pin#19) (You can use Any Pin)
+ SCL    --- SCLK(Pin#23) (You can use Any Pin)
+ SDA    --- MOSI(Pin#19) (You can use Any Pin)
  RST    --- GPIO2(Pin#3) (You can use Any Pin)
  DC     --- GPIO4(Pin#7) (You can use Any Pin)
 
- hardware i2c interface
+ i2c interface
  cc -o oled oled.c fontx.c -lwiringPi -DI2C
  SSD1606   RPI
  --------------
@@ -31,16 +31,6 @@
  VCC    --- 3.3V
  SCK    --- SCL(Pin#5)
  SDA    --- SDA(Pin#3)
-
- software i2c interface
- cc -o oled oled.c fontx.c soft_i2c.c -lwiringPi -DSOFT_I2C
- SSD1606   RPI
- --------------
- GND    --- Gnd
- VCC    --- 3.3V
- SCK    --- GPIO8(Pin#24) (You can use Any Pin)
- SDA    --- GPIO7(Pin#26) (You can use Any Pin)
-
 
 */
 
@@ -56,34 +46,20 @@
 #include <wiringPiI2C.h>
 #include <wiringShift.h>
 #include "fontx.h"
-#ifdef SOFT_I2C
-#include "soft_i2c.h"
-#endif
 
-// Hardware/Software SPI
+#define MOSI 12 // You can change
+#define SCLK 14 // You can change
 #define RST  8  // You can change
 #define DC   7  // You can change
 
-// Software SPI
-#define MOSI 12 // You can change
-#define SCLK 14 // You can change
-
-// Hardware I2C
-#define I2C_ADDRESS        0x3C
-int i2cd;
-
-#ifdef SOFT_I2C
-// Software I2C
-#define SSCL 10 // You can change
-#define SSDA 11 // You can change
-i2c_t i2ct;
-#endif
-
+//#define BITBANG    1
+//#define SHIFTOUT   2
 #define _BV(bit) (1<<(bit))
 
+#define I2C_ADDRESS        0x3C
 
 #define SSD1306_DEBUG 0
-#define OLED_DEBUG 0
+#define OLED_DEBUG    0
 
 FontxFile fx[2];
 
@@ -106,8 +82,7 @@ unsigned char frame[1024]; // frame buffer
 
 void init_hardware_spi(void);
 void init_software_spi(void);
-void init_hardware_i2c(uint8_t i2caddr);
-void init_software_i2c(uint8_t i2caddr);
+void init_i2c(uint8_t i2caddr);
 int drawChar(int x,int y,unsigned char chr,uint8_t reverse,uint8_t enhance);
 int drawString(int x ,int y,unsigned char *str,uint8_t reverse,uint8_t enhance);
 int drawSJISChar(FontxFile *fx,int x,int y,uint16_t sjis,uint8_t reverse,
@@ -118,11 +93,11 @@ int drawUTF8String(FontxFile *fx,int x,int y,unsigned char *utf8,
                    uint8_t reverse,uint8_t enhance);
 void show_hardware_spi(void);
 void show_software_spi(void);
-void show_hardware_i2c(void);
-void show_software_i2c(uint8_t i2caddr);
+void show_i2c(void);
 void usage(char *prog);
 void DumpSaveFrame(SaveFrame hoge);
 
+int i2cd;
 
 int main(int argc, char **argv){
   int i,j,k;
@@ -144,7 +119,7 @@ if(OLED_DEBUG)  printf("cpath=%s\n",cpath);
   struct stat stat_buf;
   if (stat(cpath,&stat_buf) == 0) {
 if(OLED_DEBUG)    printf("file found\n");
-    fp = fopen(cpath,"rb"); // Update
+    fp = fopen(cpath,"rb");
     fread(&sv,sizeof(sv),1,fp);
     fclose(fp);
   } else {
@@ -297,7 +272,7 @@ if(OLED_DEBUG)printf("set start colum to line [%d] = %d\n",num,col);
     return 1;
   }
 
-  if (strcmp(argv[1],"c") == 0) {
+  if (strcmp(argv[1],"r") == 0) {
     memset(&sv,0,sizeof(sv));
 if(OLED_DEBUG)DumpSaveFrame(sv);
     fp = fopen(cpath,"wb");
@@ -316,10 +291,7 @@ if(OLED_DEBUG)printf("show dislay\n");
     init_software_spi();
 #endif
 #ifdef I2C
-    init_hardware_i2c(I2C_ADDRESS);
-#endif
-#ifdef SOFT_I2C
-    init_software_i2c(I2C_ADDRESS);
+    init_i2c(I2C_ADDRESS);
 #endif
     int y;
     for (num=0;num<4;num++) {
@@ -343,10 +315,7 @@ if(OLED_DEBUG)printf("show dislay\n");
     show_software_spi();	
 #endif
 #ifdef I2C
-    show_hardware_i2c();	
-#endif
-#ifdef SOFT_I2C
-    show_software_i2c(I2C_ADDRESS);	
+    show_i2c();	
 #endif
   }
 
@@ -356,7 +325,6 @@ if(OLED_DEBUG)printf("show dislay\n");
 }
 
 
-#ifdef SPI
 /*
 Initialize SSD1306 (hardware spi)
 */
@@ -383,10 +351,9 @@ void init_hardware_spi(void){
   digitalWrite(RST,  HIGH) ;
   digitalWrite(DC, LOW);
   wiringPiSPIDataRW(0, command, 28);
-}
-#endif
 
-#ifdef SOFT_SPI
+}
+
 /*
 Initialize SSD1306 (software spi)
 */
@@ -409,23 +376,24 @@ void init_software_spi(void){
   pinMode (RST, OUTPUT) ;
   pinMode (MOSI, OUTPUT) ;
   pinMode (SCLK, OUTPUT) ;
+//  wiringPiSPISetup(0, 32*1000*1000);
   digitalWrite(RST,  LOW) ;
   delay(50);
   digitalWrite(RST,  HIGH) ;
   digitalWrite(DC, LOW);
+//  wiringPiSPIDataRW(0, command, 28);
   for(byte=0;byte<28;byte++) {
     shiftOut(MOSI, SCLK, MSBFIRST, command[byte]);
   }
+
 }
-#endif
 
 
-#ifdef I2C
 /*
-Initialize SSD1306 (hardware i2c)
+Initialize SSD1306 (i2c)
 */
 
-void init_hardware_i2c(uint8_t i2caddr){
+void init_i2c(uint8_t i2caddr){
   int byte;
   unsigned char command[] = {
     0xAE, 0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
@@ -439,46 +407,13 @@ void init_hardware_i2c(uint8_t i2caddr){
   }
 	
   i2cd = wiringPiI2CSetup(i2caddr);
-  unsigned int control = 0x00;    // Co = 0, D/C = 0
   int i;
   for(i=0;i<sizeof(command);i++) {
+    unsigned int control = 0x00;    // Co = 0, D/C = 0
     wiringPiI2CWriteReg8(i2cd, control, command[i]);
   }
+
 }
-#endif
-
-
-#ifdef SOFT_I2C
-/*
-Initialize SSD1306 (software i2c)
-*/
-
-void init_software_i2c(uint8_t i2caddr){
-  int byte;
-  unsigned char command[] = {
-    0xAE, 0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
-    0xA6, 0xD5, 0x80, 0xDA, 0x12, 0x81, 0x00, 0xB0,
-    0xA4, 0xDB, 0x40, 0x20, 0x00, 0x00, 0x10, 0x8D,
-    0x14, 0x2E, 0xA6, 0xAF 
-  };
-
-  for(byte=0;byte<1024;byte++){
-    frame[byte] = 0x00;
-  }
-	
-  wiringPiSetup();
-  i2ct = i2c_init(SSCL,SSDA);
-  i2c_start(i2ct);
-  unsigned int control = 0x00;    // Co = 0, D/C = 0
-  i2c_send_byte(i2ct, i2caddr << 1 | I2C_WRITE);
-  i2c_send_byte(i2ct, control);
-  int i;
-  for(i=0;i<sizeof(command);i++) {
-    i2c_send_byte(i2ct, command[i]);
-  }
-  i2c_stop(i2ct);
-}
-#endif
 
 /*
 Draw SJIS character on SSD1306
@@ -696,7 +631,6 @@ if(SSD1306_DEBUG)  printf("%d\n",strlen(str));
   return y;
 }
 
-#ifdef SPI
 /*
 Show frame buffer to SSD1306 (spi)
 */
@@ -705,9 +639,7 @@ void show_hardware_spi(void){
   digitalWrite(DC,  HIGH);
   wiringPiSPIDataRW(0, frame, 1024);
 }
-#endif
 
-#ifdef SOFT_SPI
 /*
 Show frame buffer to SSD1306 (software spi)
 */
@@ -720,37 +652,17 @@ void show_software_spi(void){
     shiftOut(MOSI, SCLK, MSBFIRST, frame[byte]);
   }
 }
-#endif
 
-#ifdef I2C
 /*
-Show frame buffer to SSD1306 (hardware i2c)
+Show frame buffer to SSD1306 (i2c)
 */
 
-void show_hardware_i2c(void){
+void show_i2c(void){
   int i;
   for (i = 0; i < 1024; i++) {
     wiringPiI2CWriteReg8(i2cd, 0x40, frame[i]);
   }
 }
-#endif
-
-#ifdef SOFT_I2C
-/*
-Show frame buffer to SSD1306 (software i2c)
-*/
-
-void show_software_i2c(uint8_t i2caddr){
-  int i;
-  i2c_start(i2ct);
-  i2c_send_byte(i2ct, i2caddr << 1 | I2C_WRITE);
-  i2c_send_byte(i2ct, 0x40);
-  for (i = 0; i < 1024; i++) {
-    i2c_send_byte(i2ct, frame[i]);
-  }
-  i2c_stop(i2ct);
-}
-#endif
 
 
 /*
@@ -761,7 +673,7 @@ void usage(char *prog){
   printf("Usage : %s option\n",prog);
   printf("Options:\n");
   printf("  s             show display\n");
-  printf("  c             clear all display\n");
+  printf("  r             remove all string\n");
   printf("  +1 string     add string to line#1(Ext. Font)\n");
   printf("  +2 string     add string to line#2(Ext. Font)\n");
   printf("  +3 string     add string to line#3(Ext. Font)\n");
@@ -790,18 +702,18 @@ void DumpSaveFrame(SaveFrame hoge) {
   int i,j;
   
   for(i=0;i<4;i++) {
-    printf("save[%d].ank=%d\n",i,hoge.save[i].ank);
-    printf("save[%d].utf=%d\n",i,hoge.save[i].utf);
-    printf("save[%d].colum=%d\n",i,hoge.save[i].colum);
-    printf("save[%d].reverse=%d\n",i,hoge.save[i].reverse);
-    printf("save[%d].enhance=%d\n",i,hoge.save[i].enhance);
-    printf("save[%d].size=%d\n",i,hoge.save[i].size);
+    printf("[%d].ank=%d ",i,hoge.save[i].ank);
+    printf("[%d].utf=%d ",i,hoge.save[i].utf);
+    printf("[%d].colum=%d ",i,hoge.save[i].colum);
+    printf("[%d].reverse=%d ",i,hoge.save[i].reverse);
+    printf("[%d].enhance=%d n",i,hoge.save[i].enhance);
+    printf("[%d].size=%d\n",i,hoge.save[i].size);
     for(j=0;j<hoge.save[i].size;j++) {
       if (i,hoge.save[i].ank == 1) {
-        printf("save[%d].ascii[%d]=%x\n",i,j,hoge.save[i].ascii[j]);
+        printf("[%d].ascii[%d]=%x\n",i,j,hoge.save[i].ascii[j]);
       }
       if (i,hoge.save[i].utf == 1) {
-        printf("save[%d].ascii[%d]=%x\n",i,j,hoge.save[i].sjis[j]);
+        printf("[%d].ascii[%d]=%x\n",i,j,hoge.save[i].sjis[j]);
       }
     }
   }

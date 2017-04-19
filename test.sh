@@ -1,5 +1,5 @@
 #!/bin/bash
-./oled c
+./oled r
 ./oled +1 "ABCDEFG"
 ./oled +2 "abcdefg"
 ./oled +3 "1234567"
@@ -14,7 +14,7 @@ sudo ./oled s
 echo -n "push Enter"
 read input
 
-./oled c
+./oled r
 ./oled +1 "Hello World!"
 ./oled +2 "Hello World!"
 ./oled +3 "Hello World!"
@@ -30,7 +30,7 @@ sudo ./oled s
 echo -n "push Enter"
 read input
 
-./oled c
+./oled r
 ./oled +1 "Line 4"
 ./oled +2 "Line 3"
 ./oled +3 "Line 2"
@@ -48,7 +48,7 @@ done
 echo -n "push Enter"
 read input
 
-./oled c
+./oled r
 ./oled +1 "Line 1"
 ./oled +2 "Line 2"
 ./oled +3 "Line 3"
@@ -66,7 +66,7 @@ done
 echo -n "push Enter"
 read input
 
-./oled c
+./oled r
 ./oled +2 "Thank you!!"
 ./oled P2 3
 ./oled +R 2
