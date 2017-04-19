@@ -34,7 +34,7 @@ s  : show display
 
 You can use within script.  
 #!/bin/bash  
-./oled c  
+./oled r  
 ./oled +1 "ABCDEFG"  
 ./oled +2 "abcdefg"  
 ./oled +3 "1234567"  
