@@ -127,6 +127,13 @@ bash ./test.sh
 
 ---
 
+Left  : OrangePi + SPI Module  
+Right : RaspberryPi + I2C Module  
+
+![oled-2](https://user-images.githubusercontent.com/6020549/28252021-b1a9ff4a-6ac5-11e7-9265-b757e4b3cf1d.JPG)
+
+---
+
 ![oled-1](https://cloud.githubusercontent.com/assets/6020549/24071131/782737a8-0c0e-11e7-9312-44ec00312f52.JPG)
 
 ![oled-2](https://cloud.githubusercontent.com/assets/6020549/25184287/f9945e38-2554-11e7-9075-e63d90b4a3a2.jpg)
