@@ -154,3 +154,9 @@ Set start colum
 
 
 ![oled-7](https://cloud.githubusercontent.com/assets/6020549/24125192/d2c40328-0e0a-11e7-8a6a-884c0600059e.JPG)
+
+---
+
+OrangePi ZERO Universal HAT + OLED  
+
+![zero-hat-7](https://user-images.githubusercontent.com/6020549/28547249-00f71026-7109-11e7-9a11-0bbb95423381.JPG)
