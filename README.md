@@ -2,9 +2,7 @@
 ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 
 You can operate from command line.  
-You can choose Hardware-SPI/Software-SPI/Hardware-I2C/Software-I2C Interface.  
-Software-I2C Libray is here. Thank you for usefull library.  
-https://github.com/electronicayciencia/wPi_soft_i2c  
+You can choose Hardware-SPI/Software-SPI/Hardware-I2C Interface.  
 
 Command line parameters:  
 +1 String : String for #1 line(with External Font)  
@@ -54,6 +52,8 @@ RST----GPIO2(Pin#3) *
 D/C----GPIO4(Pin#7) *  
 
 (*)You can change any pin.  
+#define RST  8  // You can change
+#define DC   7  // You can change
 
 ---
 
@@ -68,28 +68,20 @@ RST----GPIO2(Pin#3) *
 D/C----GPIO4(Pin#7) *  
 
 (*)You can change any pin.  
+#define MOSI 12 // You can change
+#define SCLK 14 // You can change
+#define RST  8  // You can change
+#define DC   7  // You can change
 
 ---
 
-Wire connection for Hardware I2C
+Wire connection for I2C
 
 OLED---RPi/Opi  
 Gnd----Gnd  
 VCC----3.3V  
 SCK----SCL(Pin#5)  
 SDA----SDA(Pin#3)  
-
----
-
-Wire connection for Software I2C
-
-OLED---RPi/Opi  
-Gnd----Gnd  
-VCC----3.3V  
-SCK----GPIO8 *  
-SDA----GPIO7 *  
-
-(*)You can change any pin.  
 
 ---
 
@@ -109,20 +101,10 @@ bash ./test.sh
 
 ---
 
-Install for Hardware I2C  
+Install for I2C  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -DI2C  
-bash ./test.sh  
-
----
-
-Install for Software I2C  
-git clone https://github.com/nopnop2002/ssd1306_rpi.git  
-git clone https://github.com/electronicayciencia/wPi_soft_i2c  
-cd ssd1306_rpi/  
-cp ../wPi_soft_i2c/soft_i2c.* ./  
-cc -o oled oled.c fontx.c soft_i2c.c -lwiringPi -DSOFT_I2C  
 bash ./test.sh  
 
 ---
