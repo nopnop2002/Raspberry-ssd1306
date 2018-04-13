@@ -62,8 +62,8 @@ Wire connection for Software SPI
 OLED---RPi/Opi  
 Gnd----Gnd  
 VCC----3.3V  
-SCL----GPIO11(Pin#26) *  
-SDA----GPIO10(Pin#24) *  
+SCL----GPIO11(Pin#23) *  
+SDA----GPIO10(Pin#19) *  
 RST----GPIO2(Pin#3) *  
 D/C----GPIO4(Pin#7) *  
 
