@@ -45,13 +45,13 @@ sudo ./oled s
 
 Wire connection for Hardware SPI
 
-OLED---Raspberry  
+OLED---RPi/Opi  
 Gnd----Gnd  
 VCC----3.3V  
 SCL----SCLK(Pin#23)  
 SDA----MOSI(Pin#19)  
-RST----GPIO2 *  
-D/C----GPIO4 *  
+RST----GPIO2(Pin#3) *  
+D/C----GPIO4(Pin#7) *  
 
 (*)You can change any pin.  
 
@@ -59,13 +59,13 @@ D/C----GPIO4 *
 
 Wire connection for Software SPI
 
-OLED---Raspberry  
+OLED---RPi/Opi  
 Gnd----Gnd  
 VCC----3.3V  
-SCL----GPIO11 *  
-SDA----GPIO10 *  
-RST----GPIO2 *  
-D/C----GPIO4 *  
+SCL----GPIO11(Pin#26) *  
+SDA----GPIO10(Pin#24) *  
+RST----GPIO2(Pin#3) *  
+D/C----GPIO4(Pin#76) *  
 
 (*)You can change any pin.  
 
@@ -73,7 +73,7 @@ D/C----GPIO4 *
 
 Wire connection for Hardware I2C
 
-OLED---Raspberry  
+OLED---RPi/Opi  
 Gnd----Gnd  
 VCC----3.3V  
 SCK----SCL(Pin#5)  
@@ -83,7 +83,7 @@ SDA----SDA(Pin#3)
 
 Wire connection for Software I2C
 
-OLED---Raspberry  
+OLED---RPi/Opi  
 Gnd----Gnd  
 VCC----3.3V  
 SCK----GPIO8 *  
