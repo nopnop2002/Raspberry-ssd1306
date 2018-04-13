@@ -2,7 +2,7 @@
 ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 
 You can operate from command line.  
-You can choose Hardware-SPI/Software-SPI/Hardware-I2C Interface.  
+You can choose Hardware-SPI/Software-SPI/I2C Interface.  
 
 Command line parameters:  
 +1 String : String for #1 line(with External Font)  
