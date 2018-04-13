@@ -52,8 +52,8 @@ RST----GPIO2(Pin#3) *
 D/C----GPIO4(Pin#7) *  
 
 (*)You can change any pin.  
-#define RST  8  // You can change
-#define DC   7  // You can change
+#define RST  8  // You can change   
+#define DC   7  // You can change   
 
 ---
 
@@ -68,10 +68,10 @@ RST----GPIO2(Pin#3) *
 D/C----GPIO4(Pin#7) *  
 
 (*)You can change any pin.  
-#define MOSI 12 // You can change
-#define SCLK 14 // You can change
-#define RST  8  // You can change
-#define DC   7  // You can change
+#define MOSI 12 // You can change   
+#define SCLK 14 // You can change   
+#define RST  8  // You can change   
+#define DC   7  // You can change   
 
 ---
 
