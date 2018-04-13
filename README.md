@@ -65,7 +65,7 @@ VCC----3.3V
 SCL----GPIO11(Pin#26) *  
 SDA----GPIO10(Pin#24) *  
 RST----GPIO2(Pin#3) *  
-D/C----GPIO4(Pin#76) *  
+D/C----GPIO4(Pin#7) *  
 
 (*)You can change any pin.  
 
