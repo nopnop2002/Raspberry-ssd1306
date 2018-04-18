@@ -47,10 +47,13 @@
 #include <wiringShift.h>
 #include "fontx.h"
 
-#define MOSI 12 // You can change
-#define SCLK 14 // You can change
+// Hardware/Software SPI
 #define RST  8  // You can change
 #define DC   7  // You can change
+
+// Software SPI
+#define MOSI 12 // You can change
+#define SCLK 14 // You can change
 
 //#define BITBANG    1
 //#define SHIFTOUT   2
