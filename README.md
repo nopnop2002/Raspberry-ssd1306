@@ -88,7 +88,7 @@ SDA----SDA(Pin#3)
 Install for Hardware SPI  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
-cc -o oled oled.c fontx.c -lwiringPi -DSPI  
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI  
 bash ./test.sh  
 
 ---
@@ -96,7 +96,7 @@ bash ./test.sh
 Install for Software SPI  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
-cc -o oled oled.c fontx.c -lwiringPi -DSOFT_SPI  
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI  
 bash ./test.sh  
 
 ---
@@ -104,7 +104,7 @@ bash ./test.sh
 Install for I2C  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
-cc -o oled oled.c fontx.c -lwiringPi -DI2C  
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C  
 bash ./test.sh  
 
 ---
