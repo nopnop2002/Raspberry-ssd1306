@@ -88,7 +88,7 @@ sudo ./oled s
 
 ---
 
-# Install for Hardware SPI  
+__Install for Hardware SPI__  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI  
@@ -96,7 +96,7 @@ bash ./test.sh
 
 ---
 
-# Install for Software SPI  
+__Install for Software SPI__  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI  
