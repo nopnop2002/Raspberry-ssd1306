@@ -4,7 +4,7 @@ ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/I2C Interface.  
 
-Command line parameters:  
+# Command line parameters:  
 +1 String : String for #1 line(with External Font)  
 +2 String : String for #2 line(with External Font)  
 +3 String : String for #3 line(with External Font)  
@@ -41,7 +41,7 @@ sudo ./oled s
 
 ---
 
-Wire connection for Hardware SPI
+# Wire connection for Hardware SPI
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -58,7 +58,7 @@ Wire connection for Hardware SPI
 
 ---
 
-Wire connection for Software SPI
+# Wire connection for Software SPI
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -77,7 +77,7 @@ Wire connection for Software SPI
 
 ---
 
-Wire connection for I2C
+# Wire connection for I2C
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -88,7 +88,7 @@ Wire connection for I2C
 
 ---
 
-Install for Hardware SPI  
+# Install for Hardware SPI  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI  
@@ -96,7 +96,7 @@ bash ./test.sh
 
 ---
 
-Install for Software SPI  
+# Install for Software SPI  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI  
@@ -104,7 +104,7 @@ bash ./test.sh
 
 ---
 
-Install for I2C  
+# Install for I2C  
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C  
