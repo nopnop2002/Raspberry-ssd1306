@@ -104,7 +104,7 @@ bash ./test.sh
 
 ---
 
-_Install for I2C_
+__Install for I2C__   
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C  
