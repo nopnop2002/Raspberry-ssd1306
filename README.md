@@ -4,7 +4,7 @@ ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/I2C Interface.  
 
-# Command line parameters:  
+__Command line parameters__  
 +1 String : String for #1 line(with External Font)  
 +2 String : String for #2 line(with External Font)  
 +3 String : String for #3 line(with External Font)  
@@ -41,7 +41,7 @@ sudo ./oled s
 
 ---
 
-# Wire connection for Hardware SPI
+__Wire connection for Hardware SPI__   
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -58,7 +58,7 @@ sudo ./oled s
 
 ---
 
-# Wire connection for Software SPI
+__Wire connection for Software SPI__   
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -77,7 +77,7 @@ sudo ./oled s
 
 ---
 
-# Wire connection for I2C
+__Wire connection for I2C__   
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
