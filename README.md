@@ -43,6 +43,16 @@ sudo ./oled s
 
 Wire connection for Hardware SPI
 
+|OLED||RPi/OPi|
+|:-:|:-:|:-:|
+|Gnd|--|Gnd|
+|VCC|--|3.3V|
+|SCL|--|SCLK(Pin#23)|
+|SDA|--|MOSI(Pin#19)|
+|RST|--|GPIO2(Pin#3) *|
+|D/C|--|GPIO4(Pin#7) *|
+
+
 OLED---RPi/Opi  
 Gnd----Gnd  
 VCC----3.3V  
