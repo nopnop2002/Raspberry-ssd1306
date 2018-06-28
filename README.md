@@ -86,12 +86,6 @@ Wire connection for I2C
 |SCK|--|SCL(Pin#5)|
 |SDA|--|SDA(Pin#3)|
 
-OLED---RPi/Opi  
-Gnd----Gnd  
-VCC----3.3V  
-SCK----SCL(Pin#5)  
-SDA----SDA(Pin#3)  
-
 ---
 
 Install for Hardware SPI  
