@@ -69,15 +69,6 @@ Wire connection for Software SPI
 |RST|--|GPIO2(Pin#3) (*)|
 |D/C|--|GPIO4(Pin#7) (*)|
 
-
-OLED---RPi/Opi  
-Gnd----Gnd  
-VCC----3.3V  
-SCL----GPIO11(Pin#23) *  
-SDA----GPIO10(Pin#19) *  
-RST----GPIO2(Pin#3) *  
-D/C----GPIO4(Pin#7) *  
-
 (*)You can change any pin.  
 #define MOSI 12 // You can change   
 #define SCLK 14 // You can change   
@@ -87,6 +78,13 @@ D/C----GPIO4(Pin#7) *
 ---
 
 Wire connection for I2C
+
+|OLED||RPi/OPi|
+|:-:|:-:|:-:|
+|Gnd|--|Gnd|
+|VCC|--|3.3V|
+|SCK|--|SCL(Pin#5)|
+|SDA|--|SDA(Pin#3)|
 
 OLED---RPi/Opi  
 Gnd----Gnd  
