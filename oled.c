@@ -87,13 +87,10 @@ void init_hardware_spi(void);
 void init_software_spi(void);
 void init_i2c(uint8_t i2caddr);
 int drawChar(int x,int y,unsigned char chr,uint8_t reverse,uint8_t enhance);
-int drawString(int x ,int y,unsigned char *str,uint8_t reverse,uint8_t enhance);
 int drawSJISChar(FontxFile *fx,int x,int y,uint16_t sjis,uint8_t reverse,
                  uint8_t enhance);
 int drawUTF8Char(FontxFile *fx,int x,int y,uint8_t *utf8,uint8_t reverse,
                  uint8_t enhance);
-int drawUTF8String(FontxFile *fx,int x,int y,unsigned char *utf8,
-                   uint8_t reverse,uint8_t enhance);
 void show_hardware_spi(void);
 void show_software_spi(void);
 void show_i2c(void);
@@ -124,7 +121,7 @@ unsigned char init_command[] = {
 
 
 int main(int argc, char **argv){
-  int i,j,k;
+  int i;
   char cpath[128];
   FILE *fp;
   SaveFrame sv;
@@ -173,7 +170,7 @@ if(OLED_DEBUG)DumpSaveFrame(sv);
     num = (numc[1] - '0') - 1;
       
 if(OLED_DEBUG)printf("add string to line [%d]\n",num);
-    sv.save[num].size = String2SJIS(argv[2], strlen(argv[2]), sv.save[num].sjis, 16);
+    sv.save[num].size = String2SJIS((unsigned char *)argv[2], strlen(argv[2]), sv.save[num].sjis, 16);
     sv.save[num].ank = 0;
     sv.save[num].utf = 1;
 if(OLED_DEBUG)DumpSaveFrame(sv);
@@ -450,8 +447,6 @@ if(SSD1306_DEBUG)  printf("GetFontx rc=%d pw=%d ph=%d\n",rc,pw,ph);
 }
 
 /*
-
-/*
 Draw UTF8 character on SSD1306
  x:1~4
  y:1~16
@@ -466,27 +461,6 @@ int drawUTF8Char(FontxFile *fx, int x,int y,uint8_t *utf8,uint8_t reverse,
   sjis = UTF2SJIS(utf8);
 if(SSD1306_DEBUG)  printf("sjis=%x\n",sjis);
   return drawSJISChar(fx, x, y, sjis, reverse, enhance);
-}
-
-/*
-Draw UTF8 string on SSD1306
- x:1~4
- y:1~16
- utfs:UTF8 string(Max 16 character)
-*/
-
-int drawUTF8String(FontxFile *fx,int x,int y,unsigned char *utfs,
-                   uint8_t reverse,uint8_t enhance){
-  int i;
-  int spos;
-  uint16_t sjis[16];
-  spos = String2SJIS(utfs, strlen(utfs), sjis, 16);
-if(SSD1306_DEBUG)  printf("spos=%d\n",spos);
-  for(i=0;i<spos;i++) {
-if(SSD1306_DEBUG)  printf("sjis[%d]=%x y=%d\n",i,sjis[i],y);
-    y=drawSJISChar(fx,x,y,sjis[i],reverse,enhance);
-  }
-  return y;
 }
 
 /*
@@ -621,22 +595,6 @@ if(SSD1306_DEBUG)  printf("drawChar chr=%x y=%d\n",chr,y);
 }
 
 /*
-Draw ASCII string on SSD1306
- x:1~4
- y:1~16
- str:ASCII string(Max 16 character)
-*/
-
-int drawString(int x ,int y,unsigned char *str,uint8_t reverse,uint8_t enhance){
-  int i;
-if(SSD1306_DEBUG)  printf("%d\n",strlen(str));
-  for(i=0;i<strlen(str);i++){
-    drawChar(x,y++,str[i],reverse,enhance);
-  }
-  return y;
-}
-
-/*
 Show frame buffer to SSD1306 (spi)
 */
 
@@ -714,10 +672,10 @@ void DumpSaveFrame(SaveFrame hoge) {
     printf("[%d].enhance=%d n",i,hoge.save[i].enhance);
     printf("[%d].size=%d\n",i,hoge.save[i].size);
     for(j=0;j<hoge.save[i].size;j++) {
-      if (i,hoge.save[i].ank == 1) {
+      if (hoge.save[i].ank == 1) {
         printf("[%d].ascii[%d]=%x\n",i,j,hoge.save[i].ascii[j]);
       }
-      if (i,hoge.save[i].utf == 1) {
+      if (hoge.save[i].utf == 1) {
         printf("[%d].ascii[%d]=%x\n",i,j,hoge.save[i].sjis[j]);
       }
     }
