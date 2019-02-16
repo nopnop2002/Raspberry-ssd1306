@@ -74,8 +74,9 @@ __Wire connection for Software SPI__
 (*)You can change any pin.  
 #define MOSI 12 // You can change   
 #define SCLK 14 // You can change   
-#define RST  8  // You can change   
-#define DC   7  // You can change   
+#define RST   8 // You can change   
+#define DC    7 // You can change   
+#define CS   10 // You can change   
 
 ---
 
