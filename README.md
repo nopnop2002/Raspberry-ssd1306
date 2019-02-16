@@ -47,10 +47,11 @@ __Wire connection for Hardware SPI__
 |:-:|:-:|:-:|
 |Gnd|--|Gnd|
 |VCC|--|3.3V|
-|SCL|--|SCLK(Pin#23)|
-|SDA|--|MOSI(Pin#19)|
-|RST|--|GPIO2(Pin#3) (*)|
-|D/C|--|GPIO4(Pin#7) (*)|
+|DO|--|SCLK(Pin#23)|
+|DI|--|MOSI(Pin#19)|
+|RES|--|GPIO2(Pin#3) (*)|
+|DC|--|GPIO4(Pin#7) (*)|
+|CS|--|CS0(Pin#24)|
 
 (*)You can change any pin.  
 #define RST  8  // You can change   
@@ -64,10 +65,11 @@ __Wire connection for Software SPI__
 |:-:|:-:|:-:|
 |Gnd|--|Gnd|
 |VCC|--|3.3V|
-|SCL|--|GPIO11(Pin#23) (*)|
-|SDA|--|GPIO10(Pin#19) (*)|
-|RST|--|GPIO2(Pin#3) (*)|
-|D/C|--|GPIO4(Pin#7) (*)|
+|DO|--|GPIO11(Pin#23) (*)|
+|DI|--|GPIO10(Pin#19) (*)|
+|RES|--|GPIO2(Pin#3) (*)|
+|DC|--|GPIO4(Pin#7) (*)|
+|CS|--|GPIO8(Pin#24) (*)|
 
 (*)You can change any pin.  
 #define MOSI 12 // You can change   

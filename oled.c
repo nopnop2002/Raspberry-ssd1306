@@ -7,10 +7,11 @@
  --------------
  GND    --- Gnd
  VCC    --- 3.3V
- SCL    --- SCLK(Pin#23)
- SDA    --- MOSI(Pin#19)
- RST    --- GPIO2(Pin#3) (You can use Any Pin)
+ DO     --- SCLK(Pin#23)
+ DI     --- MOSI(Pin#19)
+ RES    --- GPIO2(Pin#3) (You can use Any Pin)
  DC     --- GPIO4(Pin#7) (You can use Any Pin)
+ CS     --- CS0(Pin#24)
 
  software spi interface
  cc -o oled oled.c fontx.c -lwiringPi -DSOFT_SPI
@@ -18,10 +19,11 @@
  --------------
  GND    --- Gnd
  VCC    --- 3.3V
- SCL    --- SCLK(Pin#23) (You can use Any Pin)
- SDA    --- MOSI(Pin#19) (You can use Any Pin)
- RST    --- GPIO2(Pin#3) (You can use Any Pin)
+ DO     --- SCLK(Pin#23) (You can use Any Pin)
+ DI     --- MOSI(Pin#19) (You can use Any Pin)
+ RES    --- GPIO2(Pin#3) (You can use Any Pin)
  DC     --- GPIO4(Pin#7) (You can use Any Pin)
+ CS     --- GPIO8(Pin#24) (You can use Any Pin)
 
  i2c interface
  cc -o oled oled.c fontx.c -lwiringPi -DI2C
@@ -54,6 +56,7 @@
 // Software SPI
 #define MOSI 12 // You can change
 #define SCLK 14 // You can change
+#define CS   10  // You can change
 
 //#define BITBANG    1
 //#define SHIFTOUT   2
@@ -363,11 +366,15 @@ void init_hardware_spi(void){
   pinMode (DC, OUTPUT) ;
   pinMode (RST, OUTPUT) ;
   wiringPiSPISetup(0, 32*1000*1000);
+  digitalWrite(RST,  HIGH) ;
+  delay(50);
   digitalWrite(RST,  LOW) ;
   delay(50);
   digitalWrite(RST,  HIGH) ;
   digitalWrite(DC, LOW);
+  digitalWrite(CS, LOW);
   wiringPiSPIDataRW(0, init_command, sizeof(init_command));
+  digitalWrite(CS, HIGH);
 
 }
 
@@ -383,18 +390,22 @@ void init_software_spi(void){
   }
 
   wiringPiSetup();
+  pinMode (CS, OUTPUT) ;
   pinMode (DC, OUTPUT) ;
   pinMode (RST, OUTPUT) ;
   pinMode (MOSI, OUTPUT) ;
   pinMode (SCLK, OUTPUT) ;
-//  wiringPiSPISetup(0, 32*1000*1000);
+  digitalWrite(RST,  HIGH) ;
+  delay(50);
   digitalWrite(RST,  LOW) ;
   delay(50);
   digitalWrite(RST,  HIGH) ;
   digitalWrite(DC, LOW);
+  digitalWrite(CS, LOW);
   for(byte=0;byte<sizeof(init_command);byte++) {
     shiftOut(MOSI, SCLK, MSBFIRST, init_command[byte]);
   }
+  digitalWrite(CS, HIGH);
 
 }
 
@@ -602,7 +613,9 @@ Show frame buffer to SSD1306 (spi)
 
 void show_hardware_spi(void){
   digitalWrite(DC,  HIGH);
+  digitalWrite(CS, LOW);
   wiringPiSPIDataRW(0, frame, 1024);
+  digitalWrite(CS, HIGH);
 }
 
 /*
@@ -612,10 +625,11 @@ Show frame buffer to SSD1306 (software spi)
 void show_software_spi(void){
   int byte;
   digitalWrite(DC,  HIGH);
-//  wiringPiSPIDataRW(0, frame, 1024);
+  digitalWrite(CS,  LOW);
   for(byte=0;byte<1024;byte++) {
     shiftOut(MOSI, SCLK, MSBFIRST, frame[byte]);
   }
+  digitalWrite(CS,  HIGH);
 }
 
 /*
