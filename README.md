@@ -92,33 +92,41 @@ __Wire connection for I2C__
 ---
 
 __Install for Hardware SPI__  
+```
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI  
 bash ./test.sh  
+```
 
 ---
 
 __Install for Software SPI__  
+```
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI  
 bash ./test.sh  
+```
 
 ---
 
 __Install for I2C (128X64)__   
+```
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C  
 bash ./test.sh  
+```
 
 ---
 
 __Install for I2C (128X32)__   
+```
 git clone https://github.com/nopnop2002/ssd1306_rpi.git  
 cd ssd1306_rpi/  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C -DX32   
+```
 
 The number of lines which can be indicated is only 2 lines.   
 
