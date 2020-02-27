@@ -1,4 +1,4 @@
-# ssd1306_rpi
+# Raspberry-ssd1306
 ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 
 You can operate from command line.  
@@ -93,8 +93,8 @@ __Wire connection for I2C__
 
 __Install for Hardware SPI__  
 ```
-git clone https://github.com/nopnop2002/ssd1306_rpi.git  
-cd ssd1306_rpi/  
+git clone https://github.com/nopnop2002/Raspberry-ssd1306  
+cd Raspberry-ssd1306  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI  
 bash ./test.sh  
 ```
@@ -103,8 +103,8 @@ bash ./test.sh
 
 __Install for Software SPI__  
 ```
-git clone https://github.com/nopnop2002/ssd1306_rpi.git  
-cd ssd1306_rpi/  
+git clone https://github.com/nopnop2002/Raspberry-ssd1306  
+cd Raspberry-ssd1306  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI  
 bash ./test.sh  
 ```
@@ -113,8 +113,8 @@ bash ./test.sh
 
 __Install for I2C (128X64)__   
 ```
-git clone https://github.com/nopnop2002/ssd1306_rpi.git  
-cd ssd1306_rpi/  
+git clone https://github.com/nopnop2002/Raspberry-ssd1306  
+cd Raspberry-ssd1306  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C  
 bash ./test.sh  
 ```
@@ -123,8 +123,8 @@ bash ./test.sh
 
 __Install for I2C (128X32)__   
 ```
-git clone https://github.com/nopnop2002/ssd1306_rpi.git  
-cd ssd1306_rpi/  
+git clone https://github.com/nopnop2002/Raspberry-ssd1306  
+cd Raspberry-ssd1306  
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C -DX32   
 ```
 
