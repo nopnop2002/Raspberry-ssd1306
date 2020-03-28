@@ -13,27 +13,27 @@ Fontx_init(fx,"./fontx/YourOriginalFont.FNT",""); // Use your original font
 
 # List of files
 ```
-ILGH16XB.FNT	16 dot alphanumeric GOTHIC font
-ILGH24XB.FNT	24 dot alphanumeric GOTHIC font
-ILGH24XF.FNT	24 dot alphanumeric GOTHIC bold font
-ILGH32XB.FNT	32 dot alphanumeric GOTHIC font
-ILGH32XF.FNT	32 dot alphanumeric GOTHIC bold font
-ILGZ16XB.FNT	16 dot JAPANESE GOTHIC font
-ILGZ16XF.FNT	16 dot JAPANESE GOTHIC bold font
-ILGZ24XB.FNT	24 dot JAPANESE GOTHIC font
-ILGZ24XF.FNT	24 dot JAPANESE GOTHIC bold font
-ILGZ32XB.FNT	32 dot JAPANESE GOTHIC font
-ILGZ32XF.FNT	32 dot JAPANESE GOTHIC bold font
+ILGH16XB.FNT	16 dot GOTHIC font (Single byte code)
+ILGH24XB.FNT	24 dot GOTHIC font (Single byte code)
+ILGH24XF.FNT	24 dot GOTHIC bold font (Single byte code)
+ILGH32XB.FNT	32 dot GOTHIC font (Single byte code)
+ILGH32XF.FNT	32 dot GOTHIC bold font (Single byte code)
+ILGZ16XB.FNT	16 dot GOTHIC font (Double byte code)
+ILGZ16XF.FNT	16 dot GOTHIC bold font (Double byte code)
+ILGZ24XB.FNT	24 dot GOTHIC font (Double byte code)
+ILGZ24XF.FNT	24 dot GOTHIC bold font (Double byte code)
+ILGZ32XB.FNT	32 dot GOTHIC font (Double byte code)
+ILGZ32XF.FNT	32 dot GOTHIC bold font (Double byte code)
 
-ILMH16XB.FNT	16 dot alphanumeric MINCYO font
-ILMH24XB.FNT	24 dot alphanumeric MINCYO font
-ILMH24XF.FNT	24 dot alphanumeric MINCYO bold font
-ILMH32XB.FNT	32 dot alphanumeric MINCYO font
-ILMH32XF.FNT	32 dot alphanumeric MINCYO bold font
-ILMZ16XB.FNT	16 dot JAPANESE MINCYO font
-ILMZ16XF.FNT	16 dot JAPANESE MINCYO bold font
-ILMZ24XB.FNT	24 dot JAPANESE MINCYO font
-ILMZ24XF.FNT	24 dot JAPANESE MINCYO bold font
-ILMZ32XB.FNT	32 dot JAPANESE MINCYO font
-ILMZ32XF.FNT	32 dot JAPANESE MINCYO bold font
+ILMH16XB.FNT	16 dot MINCYO font (Single byte code)
+ILMH24XB.FNT	24 dot MINCYO font (Single byte code)
+ILMH24XF.FNT	24 dot MINCYO bold font (Single byte code)
+ILMH32XB.FNT	32 dot MINCYO font (Single byte code)
+ILMH32XF.FNT	32 dot MINCYO bold font (Single byte code)
+ILMZ16XB.FNT	16 dot MINCYO font (Double byte code)
+ILMZ16XF.FNT	16 dot MINCYO bold font (Double byte code)
+ILMZ24XB.FNT	24 dot MINCYO font (Double byte code)
+ILMZ24XF.FNT	24 dot MINCYO bold font (Double byte code)
+ILMZ32XB.FNT	32 dot MINCYO font (Double byte code)
+ILMZ32XF.FNT	32 dot MINCYO bold font (Double byte code)
 ```
