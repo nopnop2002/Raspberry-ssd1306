@@ -7,6 +7,9 @@ In order to modify and redistribute the IPA font, it is named "IL Font" accordin
 # FONTX format   
 You can add your original font file.   
 Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
+```
+Fontx_init(fx,"./fontx/YourOriginalFont.FNT",""); // Use your original font
+```
 
 # List of files
 ```
