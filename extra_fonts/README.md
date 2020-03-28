@@ -1,10 +1,10 @@
 # Font File   
-This tool uses IL fonts that have been converted from "IPA fonts" to FONTX format fonts.   
+This tool uses an IL font that has been converted from "IPA fonts" to FONTX format fonts.   
 This distribution is distributed under the license of the original distribution IPA font.   
 The license of IPA font is in PA_Font_License_Agreement_v1.0.txt.   
 In order to modify and redistribute the IPA font, it is named "IL Font" according to the license terms.   
 
-# FONTX format fonts
+# FONTX format   
 You can add your original font file.   
 Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
 
