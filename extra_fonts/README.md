@@ -1,7 +1,7 @@
 # Font File   
 This tool uses an IL font that has been converted from "IPA fonts" to FONTX format fonts.   
 This distribution is distributed under the license of the original distribution IPA font.   
-The license of IPA font is in PA_Font_License_Agreement_v1.0.txt.   
+The license of IPA font is in IPA_Font_License_Agreement_v1.0.txt.   
 In order to modify and redistribute the IPA font, it is named "IL Font" according to the license terms.   
 
 # FONTX format   
