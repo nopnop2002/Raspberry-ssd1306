@@ -2,14 +2,14 @@
 This tool uses IL fonts that have been converted from "IPA fonts" to FONTX format fonts.   
 This distribution is distributed under the license of the original distribution IPA font.   
 The license of IPA font is in PA_Font_License_Agreement_v1.0.txt.   
-In order to modify and redistribute the IPA font, it is named ÅgIL FontÅh according to the license terms.   
+In order to modify and redistribute the IPA font, it is named "IL Font" according to the license terms.   
 
-# Fonr File Format
+# FONTX format fonts
 You can add your original font file.   
-The format of the font file is the FONTX format.   
 Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
 
 # List of files
+```
 ILGH16XB.FNT	16 dot alphanumeric GOTHIC font
 ILGH24XB.FNT	24 dot alphanumeric GOTHIC font
 ILGH24XF.FNT	24 dot alphanumeric GOTHIC bold font
@@ -33,4 +33,4 @@ ILMZ24XB.FNT	24 dot JAPANESE MINCYO font
 ILMZ24XF.FNT	24 dot JAPANESE MINCYO bold font
 ILMZ32XB.FNT	32 dot JAPANESE MINCYO font
 ILMZ32XF.FNT	32 dot JAPANESE MINCYO bold font
-
+```
