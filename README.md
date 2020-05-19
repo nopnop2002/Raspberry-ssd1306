@@ -1,5 +1,5 @@
 # Raspberry-ssd1306
-ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
+ssd1306 Command Line Tool for RaspberryPi / OrangePi
 
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/I2C Interface.  
