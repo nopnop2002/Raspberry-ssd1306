@@ -161,9 +161,7 @@ Line3-4 : Internal Font
 ---
 
 Set start colum  
-
 ![oled-6](https://cloud.githubusercontent.com/assets/6020549/24125179/b3b09bfe-0e0a-11e7-83bc-9dbd7b26db18.JPG)
-
 
 ![oled-7](https://cloud.githubusercontent.com/assets/6020549/24125192/d2c40328-0e0a-11e7-8a6a-884c0600059e.JPG)
 
@@ -175,9 +173,7 @@ Set start colum
 ---
 
 RaspberryPi ZERO HAT + OLED   
-
 ![RaspberryPi-ZERO](https://user-images.githubusercontent.com/6020549/67628271-a438f800-f8a5-11e9-8af8-99964ebaae8e.JPG)
 
 OrangePi ZERO HAT + OLED  
-
 ![zero-hat-7](https://user-images.githubusercontent.com/6020549/28547249-00f71026-7109-11e7-9a11-0bbb95423381.JPG)
