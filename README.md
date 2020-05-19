@@ -4,7 +4,7 @@ ssd1306 Command Line Tool for Raspberry Pi / Orange Pi
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/I2C Interface.  
 
-__Command line parameters__  
+# Command line parameters
 +1 String : String for #1 line(with External Font)  
 +2 String : String for #2 line(with External Font)  
 +3 String : String for #3 line(with External Font)  
@@ -41,7 +41,7 @@ sudo ./oled s
 
 ---
 
-__Wire connection for Hardware SPI__   
+# Wire connection for Hardware SPI
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -59,7 +59,7 @@ __Wire connection for Hardware SPI__
 
 ---
 
-__Wire connection for Software SPI__   
+# Wire connection for Software SPI
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -80,7 +80,7 @@ __Wire connection for Software SPI__
 
 ---
 
-__Wire connection for I2C__   
+# Wire connection for I2C
 
 |OLED||RPi/OPi|
 |:-:|:-:|:-:|
@@ -91,7 +91,13 @@ __Wire connection for I2C__
 
 ---
 
-__Install for Hardware SPI__  
+# Software requirement
+
+WiringPi Library   
+
+---
+
+# Install for Hardware SPI
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -101,7 +107,7 @@ bash ./test.sh
 
 ---
 
-__Install for Software SPI__  
+# Install for Software SPI
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -111,7 +117,7 @@ bash ./test.sh
 
 ---
 
-__Install for I2C (128X64)__   
+# Install for I2C (128X64)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -121,7 +127,7 @@ bash ./test.sh
 
 ---
 
-__Install for I2C (128X32)__   
+# Install for I2C (128X32)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
