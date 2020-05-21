@@ -47,8 +47,8 @@ sudo ./oled s
 |:-:|:-:|:-:|
 |Gnd|--|Gnd|
 |VCC|--|3.3V|
-|DO|--|SCLK(Pin#23)|
-|DI|--|MOSI(Pin#19)|
+|D0|--|SCLK(Pin#23)|
+|D1|--|MOSI(Pin#19)|
 |RES|--|GPIO2(Pin#3) (*)|
 |DC|--|GPIO4(Pin#7) (*)|
 |CS|--|CS0(Pin#24)|
@@ -65,8 +65,8 @@ sudo ./oled s
 |:-:|:-:|:-:|
 |Gnd|--|Gnd|
 |VCC|--|3.3V|
-|DO|--|GPIO11(Pin#23) (*)|
-|DI|--|GPIO10(Pin#19) (*)|
+|D0|--|GPIO11(Pin#23) (*)|
+|D1|--|GPIO10(Pin#19) (*)|
 |RES|--|GPIO2(Pin#3) (*)|
 |DC|--|GPIO4(Pin#7) (*)|
 |CS|--|GPIO8(Pin#24) (*)|
