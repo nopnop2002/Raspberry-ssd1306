@@ -146,24 +146,23 @@ Right : RaspberryPi + I2C Module
 
 ---
 
-![oled-1](https://cloud.githubusercontent.com/assets/6020549/24071131/782737a8-0c0e-11e7-9312-44ec00312f52.JPG)
+![OLED-1](https://user-images.githubusercontent.com/6020549/82556597-07251000-9ba5-11ea-9658-84e21e635273.JPG)
 
-![oled-2](https://cloud.githubusercontent.com/assets/6020549/25184287/f9945e38-2554-11e7-9075-e63d90b4a3a2.jpg)
+![OLED-2](https://user-images.githubusercontent.com/6020549/82556776-5f5c1200-9ba5-11ea-914e-e94744ceebf9.jpg)
 
-![oled-4](https://cloud.githubusercontent.com/assets/6020549/24076582/e037998c-0c77-11e7-9e48-525e27c478a3.JPG)
+![OLED-4](https://user-images.githubusercontent.com/6020549/82556641-1efc9400-9ba5-11ea-9928-5b3f3988cc5f.JPG)
 
 Line1-2 : External Font  
 Line3-4 : Internal Font  
 
-
-![oled-5](https://cloud.githubusercontent.com/assets/6020549/24293214/f627fefc-10d3-11e7-9304-bcfd58d59d92.JPG)
+![OLED-5](https://user-images.githubusercontent.com/6020549/82556679-2de34680-9ba5-11ea-9f9b-1314b84069c0.JPG)
 
 ---
 
 Set start colum  
-![oled-6](https://cloud.githubusercontent.com/assets/6020549/24125179/b3b09bfe-0e0a-11e7-83bc-9dbd7b26db18.JPG)
+![OLED-6](https://user-images.githubusercontent.com/6020549/82556897-9c280900-9ba5-11ea-9c0b-b341931e9a98.JPG)
 
-![oled-7](https://cloud.githubusercontent.com/assets/6020549/24125192/d2c40328-0e0a-11e7-8a6a-884c0600059e.JPG)
+![OLED-7](https://user-images.githubusercontent.com/6020549/82556916-a518da80-9ba5-11ea-95c2-627ec1b96d8f.JPG)
 
 ---
 
