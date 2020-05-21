@@ -166,7 +166,10 @@ Set start colum
 
 ---
 
-128 X 32 Module   
+128 X 64 i2c Module
+![OLED-1](https://user-images.githubusercontent.com/6020549/82557232-50c22a80-9ba6-11ea-8636-b00e0a950b0b.JPG)
+
+128 X 32 i2c Module   
 ![oled-3](https://user-images.githubusercontent.com/6020549/44244307-4a06c680-a20e-11e8-986f-6d0db5edeb2b.JPG)
 
 ---
