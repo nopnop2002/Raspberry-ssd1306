@@ -53,7 +53,7 @@ sudo ./oled s
 |DC|--|GPIO4(Pin#7) (*)|
 |CS|--|CS0(Pin#24)|
 
-(*)You can change any pin.  
+(*)You can change to another pin.   
 #define RST  8  // You can change   
 #define DC   7  // You can change   
 
@@ -71,7 +71,7 @@ sudo ./oled s
 |DC|--|GPIO4(Pin#7) (*)|
 |CS|--|GPIO8(Pin#24) (*)|
 
-(*)You can change any pin.  
+(*)You can change to another pin.   
 #define MOSI 12 // You can change   
 #define SCLK 14 // You can change   
 #define RST   8 // You can change   
