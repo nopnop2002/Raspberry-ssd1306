@@ -153,8 +153,7 @@ Please change here.
 # Font File   
 You can add your original font file.   
 The format of the font file is the FONTX format.   
-Your font file is put in font directory.   
-Your font file is uploaded to SPIFFS partition using meke flash.   
+Your font file is put in fontx directory.   
 
 Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
 
