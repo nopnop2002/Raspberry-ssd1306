@@ -159,7 +159,7 @@ Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX
 
 ---
 
-# FONTX Editor   
+# Font File Editor   
 [There](http://elm-chan.org/fsw/fontxedit.zip) is a font file Editor.   
 This can be done on Windows 10.   
 Developer page is [here](http://elm-chan.org/fsw_e.html).   
