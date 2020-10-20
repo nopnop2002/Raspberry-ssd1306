@@ -168,8 +168,8 @@ Developer page is [here](http://elm-chan.org/fsw_e.html).
 
 
 This tool uses the following as default fonts:   
-- font/ILGH16XB.FNT // 8x16Dot Gothic
-- font/ILMH16XB.FNT // 8x16Dot Mincyo
+- fontx/ILGH16XB.FNT // 8x16Dot Gothic
+- fontx/ILMH16XB.FNT // 8x16Dot Mincyo
 
 Changing this file will change the font.
 
