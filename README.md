@@ -151,7 +151,7 @@ Please change here.
 ---
 
 # Font File   
-You can add your original font file.   
+You can add your original fonts.   
 The format of the font file is the FONTX format.   
 Your font file is put in fontx directory.   
 
