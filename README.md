@@ -136,6 +136,18 @@ cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C -DX32
 
 The number of lines which can be indicated is only 2 lines.   
 
+---
+
+# Change font style
+
+You can choose the font style.   
+Please change here.   
+
+```
+  // You can change font file
+  Fontx_init(fx,"./fontx/ILGH16XB.FNT","./fontx/ILGZ16XB.FNT"); // 16Dot Gothic
+//  Fontx_init(fx,"./fontx/ILMH16XB.FNT","./fontx/ILMZ16XB.FNT"); // 16Dot Mincyo
+```
 
 ---
 
