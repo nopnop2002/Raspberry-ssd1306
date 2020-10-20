@@ -138,8 +138,7 @@ The number of lines which can be indicated is only 2 lines.
 
 ---
 
-# Change font style
-
+# Change font style   
 You can choose the font style.   
 Please change here.   
 
@@ -148,6 +147,32 @@ Please change here.
   Fontx_init(fx,"./fontx/ILGH16XB.FNT","./fontx/ILGZ16XB.FNT"); // 16Dot Gothic
 //  Fontx_init(fx,"./fontx/ILMH16XB.FNT","./fontx/ILMZ16XB.FNT"); // 16Dot Mincyo
 ```
+
+---
+
+# Font File   
+You can add your original font file.   
+The format of the font file is the FONTX format.   
+Your font file is put in font directory.   
+Your font file is uploaded to SPIFFS partition using meke flash.   
+
+Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
+
+---
+
+# FONTX Editor   
+[There](http://elm-chan.org/fsw/fontxedit.zip) is FONTX Editor.   
+This can be done on Windows 10.   
+Developer page is [here](http://elm-chan.org/fsw_e.html).   
+
+![FontxEditor](https://user-images.githubusercontent.com/6020549/78731275-3b889800-797a-11ea-81ba-096dbf07c4b8.png)
+
+
+This tool uses the following as default fonts:   
+- font/ILGH16XB.FNT // 8x16Dot Gothic
+- font/ILMH16XB.FNT // 8x16Dot Mincyo
+
+Changing this file will change the font.
 
 ---
 
