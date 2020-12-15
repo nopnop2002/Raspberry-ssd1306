@@ -156,7 +156,7 @@ if(OLED_DEBUG)DumpSaveFrame(sv);
 
   if (argc == 1) {
     usage(basename(argv[0]));
-    return 0;
+    return 1;
   }
 
   // You can change font file
@@ -182,7 +182,7 @@ if(OLED_DEBUG)DumpSaveFrame(sv);
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if ( (strcmp(argv[1],"+a") == 0) ||
@@ -210,7 +210,7 @@ if(OLED_DEBUG)DumpSaveFrame(sv);
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if ( (strcmp(argv[1],"-1") == 0) ||
@@ -226,7 +226,7 @@ if(OLED_DEBUG)DumpSaveFrame(sv);
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if ( (strcmp(argv[1],"+R") == 0) ||
@@ -234,13 +234,13 @@ if(OLED_DEBUG)DumpSaveFrame(sv);
     strcpy(numc,argv[2]);
     num = (numc[0] - '0') - 1;
 if(OLED_DEBUG)printf("set/unset reverse to line [%d]\n",num);
-    if (num < 0 || num > 3) return 0;
+    if (num < 0 || num > 3) return 1;
     if (strcmp(argv[1],"+R") == 0) sv.save[num].reverse = 1;
     if (strcmp(argv[1],"-R") == 0) sv.save[num].reverse = 0;
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if ( (strcmp(argv[1],"+U") == 0) ||
@@ -248,13 +248,13 @@ if(OLED_DEBUG)printf("set/unset reverse to line [%d]\n",num);
     strcpy(numc,argv[2]);
     num = (numc[0] - '0') - 1;
 if(OLED_DEBUG)printf("set/unset reverse to line [%d]\n",num);
-    if (num < 0 || num > 3) return 0;
+    if (num < 0 || num > 3) return 1;
     if (strcmp(argv[1],"+U") == 0) sv.save[num].enhance = 1;
     if (strcmp(argv[1],"-U") == 0) sv.save[num].enhance = 0;
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if ( strcmp(argv[1],"+L") == 0) {
@@ -265,7 +265,7 @@ if(OLED_DEBUG)printf("set/unset reverse to line [%d]\n",num);
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if ( strcmp(argv[1],"-L") == 0) {
@@ -276,7 +276,7 @@ if(OLED_DEBUG)printf("set/unset reverse to line [%d]\n",num);
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if ( (strcmp(argv[1],"P1") == 0) ||
@@ -289,13 +289,13 @@ if(OLED_DEBUG)printf("set/unset reverse to line [%d]\n",num);
     int col;
 //    col = (numc[0] - '0') - 1;
     col = atoi(numc) - 1;
-    if (col < 0 || col > 16) return 0;
+    if (col < 0 || col > 16) return 1;
 if(OLED_DEBUG)printf("set start colum to line [%d] = %d\n",num,col);
     sv.save[num].colum = col;
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if (strcmp(argv[1],"r") == 0) {
@@ -304,7 +304,7 @@ if(OLED_DEBUG)DumpSaveFrame(sv);
     fp = fopen(cpath,"wb");
     fwrite(&sv,sizeof(sv),1,fp);
     fclose(fp);
-    return 1;
+    return 0;
   }
 
   if (strcmp(argv[1],"s") == 0) {
