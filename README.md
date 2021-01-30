@@ -97,7 +97,7 @@ WiringPi Library
 
 ---
 
-# Install for Hardware SPI
+# Install SSD1306 for Hardware SPI (128x64)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -105,9 +105,24 @@ cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI
 bash ./test.sh
 ```
 
+![OLED-128x64](https://user-images.githubusercontent.com/6020549/106347419-a4723f80-6301-11eb-97cd-1f8311c0e179.JPG)
+
 ---
 
-# Install for Software SPI
+# Install SSD1306 for Hardware SPI (128x32)
+```
+git clone https://github.com/nopnop2002/Raspberry-ssd1306
+cd Raspberry-ssd1306
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI -DX32
+bash ./test.sh
+```
+
+The number of lines which can be indicated is only 2 lines.   
+![OLED-128x32](https://user-images.githubusercontent.com/6020549/106347297-cdde9b80-6300-11eb-9646-a7bd3b9ea466.JPG)
+
+---
+
+# Install SSD1306 for Software SPI (128x64)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -117,7 +132,17 @@ bash ./test.sh
 
 ---
 
-# Install for I2C (128X64)
+# Install SSD1306 for Software SPI (128x32)
+```
+git clone https://github.com/nopnop2002/Raspberry-ssd1306
+cd Raspberry-ssd1306
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI -DX32
+bash ./test.sh
+```
+
+---
+
+# Install SSD1306 for I2C (128x64)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -125,9 +150,11 @@ cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C
 bash ./test.sh
 ```
 
+![OLED-1](https://user-images.githubusercontent.com/6020549/82557232-50c22a80-9ba6-11ea-8636-b00e0a950b0b.JPG)
+
 ---
 
-# Install for I2C (128X32)
+# Install SSD1306 for I2C (128x32)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -135,6 +162,7 @@ cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C -DX32
 ```
 
 The number of lines which can be indicated is only 2 lines.   
+![oled-3](https://user-images.githubusercontent.com/6020549/44244307-4a06c680-a20e-11e8-986f-6d0db5edeb2b.JPG)
 
 ---
 
@@ -199,14 +227,6 @@ Set start colum
 ![OLED-6](https://user-images.githubusercontent.com/6020549/82556897-9c280900-9ba5-11ea-9c0b-b341931e9a98.JPG)
 
 ![OLED-7](https://user-images.githubusercontent.com/6020549/82556916-a518da80-9ba5-11ea-95c2-627ec1b96d8f.JPG)
-
----
-
-128 X 64 i2c Module
-![OLED-1](https://user-images.githubusercontent.com/6020549/82557232-50c22a80-9ba6-11ea-8636-b00e0a950b0b.JPG)
-
-128 X 32 i2c Module   
-![oled-3](https://user-images.githubusercontent.com/6020549/44244307-4a06c680-a20e-11e8-986f-6d0db5edeb2b.JPG)
 
 ---
 
