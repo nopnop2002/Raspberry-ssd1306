@@ -131,6 +131,8 @@ cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI -DOFFSET=2
 bash ./test.sh
 ```
 
+Left:1.3 inch SH1106   
+Right:0.96 inch SSD1306   
 ![OLED-SH1106](https://user-images.githubusercontent.com/6020549/106369496-5c046180-6395-11eb-8f36-376474120047.JPG)
 
 ---
@@ -146,8 +148,6 @@ bash ./test.sh
 ---
 
 # Install SSH106 for Software SPI (128x32)
-Left:1.3 inch SH1106   
-Right:0.96 inch SSD1306   
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
@@ -193,14 +193,15 @@ The number of lines which can be indicated is only 2 lines.
 ---
 
 # Install SH1106 for I2C (128x64)
-Left:1.3 inch SH1106   
-Right:0.96 inch SSD1306   
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C -DOFFSET=2
 bash ./test.sh
 ```
+
+Left:1.3 inch SH1106   
+Right:0.96 inch SSD1306   
 ![OLED-SH1106](https://user-images.githubusercontent.com/6020549/106369513-8b1ad300-6395-11eb-9653-26b470829de2.JPG)
 
 ---
