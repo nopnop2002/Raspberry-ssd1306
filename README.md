@@ -1,5 +1,6 @@
 # Raspberry-ssd1306
-ssd1306 Command Line Tool for RaspberryPi / OrangePi
+ssd1306 Command Line Tool for RaspberryPi.   
+It also works with OrangePi / NanoPi.   
 
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/I2C Interface.  
@@ -49,13 +50,13 @@ sudo ./oled s
 |VCC|--|3.3V|
 |D0|--|SCLK(Pin#23)|
 |D1|--|MOSI(Pin#19)|
-|RES|--|GPIO2(Pin#3) (*)|
-|DC|--|GPIO4(Pin#7) (*)|
+|RES|--|GPIO18(Pin#12) (*)|
+|DC|--|GPIO17(Pin#11) (*)|
 |CS|--|CS0(Pin#24)|
 
 (*)You can change to another pin.   
-#define RST  8  // You can change   
-#define DC   7  // You can change   
+#define RST  1  // You can change   
+#define DC   0  // You can change   
 
 ---
 
@@ -67,15 +68,15 @@ sudo ./oled s
 |VCC|--|3.3V|
 |D0|--|GPIO11(Pin#23) (*)|
 |D1|--|GPIO10(Pin#19) (*)|
-|RES|--|GPIO2(Pin#3) (*)|
-|DC|--|GPIO4(Pin#7) (*)|
+|RES|--|GPIO18(Pin#12) (*)|
+|DC|--|GPIO17(Pin#11) (*)|
 |CS|--|GPIO8(Pin#24) (*)|
 
 (*)You can change to another pin.   
 #define MOSI 12 // You can change   
 #define SCLK 14 // You can change   
-#define RST   8 // You can change   
-#define DC    7 // You can change   
+#define RST   1 // You can change   
+#define DC    0 // You can change   
 #define CS   10 // You can change   
 
 ---
@@ -122,6 +123,18 @@ The number of lines which can be indicated is only 2 lines.
 
 ---
 
+# Install SH1106 for Hardware SPI (128x64)
+```
+git clone https://github.com/nopnop2002/Raspberry-ssd1306
+cd Raspberry-ssd1306
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI -DOFFSET=2
+bash ./test.sh
+```
+
+![OLED-SH1106](https://user-images.githubusercontent.com/6020549/106369496-5c046180-6395-11eb-8f36-376474120047.JPG)
+
+---
+
 # Install SSD1306 for Software SPI (128x64)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
@@ -132,13 +145,24 @@ bash ./test.sh
 
 ---
 
-# Install SSD1306 for Software SPI (128x32)
+# Install SSH106 for Software SPI (128x32)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
-cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI -DX32
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI -DOFFSET=2
 bash ./test.sh
 ```
+
+---
+
+# Install SSD1306 for Software SPI (128x64)
+```
+git clone https://github.com/nopnop2002/Raspberry-ssd1306
+cd Raspberry-ssd1306
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI
+bash ./test.sh
+```
+
 
 ---
 
@@ -163,6 +187,18 @@ cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C -DX32
 
 The number of lines which can be indicated is only 2 lines.   
 ![oled-3](https://user-images.githubusercontent.com/6020549/44244307-4a06c680-a20e-11e8-986f-6d0db5edeb2b.JPG)
+
+---
+
+# Install SH1106 for I2C (128x64)
+```
+git clone https://github.com/nopnop2002/Raspberry-ssd1306
+cd Raspberry-ssd1306
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DI2C -DOFFSET=2
+bash ./test.sh
+```
+
+![OLED-SH1106](https://user-images.githubusercontent.com/6020549/106369513-8b1ad300-6395-11eb-9653-26b470829de2.JPG)
 
 ---
 
@@ -205,7 +241,6 @@ Changing this file will change the font.
 
 Left  : OrangePi + SPI Module  
 Right : RaspberryPi + I2C Module  
-
 ![oled-2](https://user-images.githubusercontent.com/6020549/28252021-b1a9ff4a-6ac5-11e7-9265-b757e4b3cf1d.JPG)
 
 ---
@@ -214,14 +249,12 @@ Right : RaspberryPi + I2C Module
 
 ![OLED-2](https://user-images.githubusercontent.com/6020549/82556776-5f5c1200-9ba5-11ea-914e-e94744ceebf9.jpg)
 
-![OLED-4](https://user-images.githubusercontent.com/6020549/82556641-1efc9400-9ba5-11ea-9928-5b3f3988cc5f.JPG)
-
 Line1-2 : External Font  
 Line3-4 : Internal Font  
+![OLED-4](https://user-images.githubusercontent.com/6020549/82556641-1efc9400-9ba5-11ea-9928-5b3f3988cc5f.JPG)
 
+Underline and Invert   
 ![OLED-5](https://user-images.githubusercontent.com/6020549/82556679-2de34680-9ba5-11ea-9f9b-1314b84069c0.JPG)
-
----
 
 Set start colum  
 ![OLED-6](https://user-images.githubusercontent.com/6020549/82556897-9c280900-9ba5-11ea-9c0b-b341931e9a98.JPG)

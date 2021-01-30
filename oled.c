@@ -9,8 +9,8 @@
  VCC    --- 3.3V
  DO     --- SCLK(Pin#23)
  DI     --- MOSI(Pin#19)
- RES    --- GPIO2(Pin#3) (You can use Any Pin)
- DC     --- GPIO4(Pin#7) (You can use Any Pin)
+ RES    --- GPIO18(Pin#12) (You can use Any Pin)
+ DC     --- GPIO17(Pin#11) (You can use Any Pin)
  CS     --- CS0(Pin#24)
 
  software spi interface
@@ -21,8 +21,8 @@
  VCC    --- 3.3V
  DO     --- SCLK(Pin#23) (You can use Any Pin)
  DI     --- MOSI(Pin#19) (You can use Any Pin)
- RES    --- GPIO2(Pin#3) (You can use Any Pin)
- DC     --- GPIO4(Pin#7) (You can use Any Pin)
+ RES    --- GPIO18(Pin#12) (You can use Any Pin)
+ DC     --- GPIO17(Pin#11) (You can use Any Pin)
  CS     --- GPIO8(Pin#24) (You can use Any Pin)
 
  i2c interface
@@ -50,8 +50,8 @@
 #include "fontx.h"
 
 // Hardware/Software SPI
-#define RST  8  // You can change
-#define DC   7  // You can change
+#define RST  1  // You can change
+#define DC   0  // You can change
 
 // Software SPI
 #define MOSI 12 // You can change
@@ -94,9 +94,9 @@ int drawSJISChar(FontxFile *fx,int x,int y,uint16_t sjis,uint8_t reverse,
                  uint8_t enhance);
 int drawUTF8Char(FontxFile *fx,int x,int y,uint8_t *utf8,uint8_t reverse,
                  uint8_t enhance);
-void show_hardware_spi(void);
-void show_software_spi(void);
-void show_i2c(void);
+void show_hardware_spi(int page, int offset);
+void show_software_spi(int page, int offset);
+void show_i2c(int page, int offset);
 void usage(char *prog);
 void DumpSaveFrame(SaveFrame hoge);
 
@@ -105,22 +105,41 @@ int i2cd;
 #ifndef X32
 // 128x64
 unsigned char init_command[] = {
+#if 0
+    // OLED_CMD_SET_HORI_ADDR_MODE
     0xAE, 0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
-    //0xA6, 0xD5, 0x80, 0xDA, 0x12, 0x81, 0x00, 0xB0,
-    0xA6, 0xD5, 0x80, 0xDA, 0x12, 0x81, 0xFF,
+    0xD5, 0x80, 0xDA, 0x12, 0x81, 0xFF,
     0xA4, 0xDB, 0x40, 0x20, 0x00, 0x00, 0x10, 0x8D,
     0x14, 0x2E, 0xA6, 0xAF
+#endif
+
+#if 1
+    // OLED_CMD_SET_PAGE_ADDR_MODE
+    0xAE, 0xA8, 0x3F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
+    0xD5, 0x80, 0xDA, 0x12, 0x81, 0xFF,
+    0xA4, 0xDB, 0x40, 0x20, 0x02, 0x00, 0x10, 0x8D,
+    0x14, 0x2E, 0xA6, 0xAF
+#endif
 };
 #endif
 
 #ifdef X32
 // 128x32
 unsigned char init_command[] = {
+#if 0
+    // OLED_CMD_SET_HORI_ADDR_MODE
     0xAE, 0xA8, 0x1F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
-    //0xA6, 0xD5, 0x80, 0xDA, 0x02, 0x81, 0x00, 0xB0,
-    0xA6, 0xD5, 0x80, 0xDA, 0x02, 0x81, 0xFF,
+    0xD5, 0x80, 0xDA, 0x02, 0x81, 0xFF,
     0xA4, 0xDB, 0x40, 0x20, 0x00, 0x00, 0x10, 0x8D,
     0x14, 0x2E, 0xA6, 0xAF
+#endif
+#if 1
+    // OLED_CMD_SET_PAGE_ADDR_MODE
+    0xAE, 0xA8, 0x1F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,
+    0xD5, 0x80, 0xDA, 0x02, 0x81, 0xFF,
+    0xA4, 0xDB, 0x40, 0x20, 0x02, 0x00, 0x10, 0x8D,
+    0x14, 0x2E, 0xA6, 0xAF
+#endif
 };
 #endif
 
@@ -130,6 +149,17 @@ int main(int argc, char **argv){
   char cpath[128];
   FILE *fp;
   SaveFrame sv;
+
+  int offset = 0;
+  int page = 8;
+#ifdef OFFSET
+  offset = OFFSET;
+#endif
+#ifdef X32
+  page = 4;
+#endif
+  //printf("page=%d\n",page);
+  //printf("Your module has offset=%d\n", offset);
   
 if(OLED_DEBUG)  printf("argv[0]=%s\n",argv[0]);
   strcpy(cpath, argv[0]);
@@ -335,13 +365,13 @@ if(OLED_DEBUG)printf("show dislay\n");
       }
     }
 #ifdef SPI
-    show_hardware_spi();	
+    show_hardware_spi(page, offset);	
 #endif
 #ifdef SOFT_SPI
-    show_software_spi();	
+    show_software_spi(page, offset);	
 #endif
 #ifdef I2C
-    show_i2c();	
+    show_i2c(page, offset);	
 #endif
   }
 
@@ -611,18 +641,60 @@ if(SSD1306_DEBUG)  printf("drawChar chr=%x y=%d\n",chr,y);
 Show frame buffer to SSD1306 (spi)
 */
 
-void show_hardware_spi(void){
+void show_hardware_spi(int page, int offset){
+  unsigned char page_command[3];
+
+  for (int _page=0;_page<page;_page++) {
+    page_command[0] = 0x00 + offset;
+    page_command[1] = 0x10;
+    page_command[2] = 0xB0 + _page;
+    digitalWrite(DC,  LOW);
+    digitalWrite(CS, LOW);
+    wiringPiSPIDataRW(0, page_command, sizeof(page_command));
+    digitalWrite(CS, HIGH);
+
+    digitalWrite(DC,  HIGH);
+    digitalWrite(CS, LOW);
+    wiringPiSPIDataRW(0, &frame[_page*128], 128);
+    digitalWrite(CS, HIGH);
+  }
+
+#if 0
   digitalWrite(DC,  HIGH);
   digitalWrite(CS, LOW);
   wiringPiSPIDataRW(0, frame, 1024);
   digitalWrite(CS, HIGH);
+#endif
 }
 
 /*
 Show frame buffer to SSD1306 (software spi)
 */
 
-void show_software_spi(void){
+void show_software_spi(int page, int offset){
+  unsigned char page_command[3];
+
+  for (int _page=0;_page<page;_page++) {
+    page_command[0] = 0x00 + offset;
+    page_command[1] = 0x10;
+    page_command[2] = 0xB0 + _page;
+    digitalWrite(DC,  LOW);
+    digitalWrite(CS,  LOW);
+    for(int i=0;i<sizeof(page_command);i++) {
+      shiftOut(MOSI, SCLK, MSBFIRST, page_command[i]);
+    }
+
+    digitalWrite(DC,  HIGH);
+    digitalWrite(CS,  LOW);
+    for(int col=0;col<128;col++) {
+      shiftOut(MOSI, SCLK, MSBFIRST, frame[_page*128+col]);
+    }
+    digitalWrite(CS,  HIGH);
+  }
+
+
+
+#if 0
   int byte;
   digitalWrite(DC,  HIGH);
   digitalWrite(CS,  LOW);
@@ -630,17 +702,35 @@ void show_software_spi(void){
     shiftOut(MOSI, SCLK, MSBFIRST, frame[byte]);
   }
   digitalWrite(CS,  HIGH);
+#endif
 }
 
 /*
 Show frame buffer to SSD1306 (i2c)
 */
 
-void show_i2c(void){
+void show_i2c(int page,int offset){
+  unsigned char page_command[3];
+
+  for (int _page=0;_page<page;_page++) {
+    page_command[0] = 0x00 + offset;
+    page_command[1] = 0x10;
+    page_command[2] = 0xB0 + _page;
+
+    for(int i=0;i<sizeof(page_command);i++) {
+      wiringPiI2CWriteReg8(i2cd, 0x00, page_command[i]);
+    }
+
+    for(int col=0;col<128;col++) {
+      wiringPiI2CWriteReg8(i2cd, 0x40, frame[_page*128+col]);
+    }
+  }
+#if 0
   int i;
   for (i = 0; i < 1024; i++) {
     wiringPiI2CWriteReg8(i2cd, 0x40, frame[i]);
   }
+#endif
 }
 
 
