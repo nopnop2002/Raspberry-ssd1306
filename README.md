@@ -115,7 +115,6 @@ bash ./test.sh
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
 cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSPI -DX32
-bash ./test.sh
 ```
 
 The number of lines which can be indicated is only 2 lines.   
@@ -147,21 +146,20 @@ bash ./test.sh
 
 ---
 
-# Install SSH106 for Software SPI (128x32)
+# Install SSD1306 for Software SPI (128x32)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
-cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI -DOFFSET=2
-bash ./test.sh
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI -DX32
 ```
 
 ---
 
-# Install SSD1306 for Software SPI (128x64)
+# Install SH1106 for Software SPI (128x64)
 ```
 git clone https://github.com/nopnop2002/Raspberry-ssd1306
 cd Raspberry-ssd1306
-cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI
+cc -o oled oled.c fontx.c -lwiringPi -lpthread -DSOFT_SPI -DOFFSET=2
 bash ./test.sh
 ```
 
