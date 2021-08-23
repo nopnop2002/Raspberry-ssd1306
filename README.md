@@ -1,6 +1,6 @@
 # Raspberry-ssd1306
 ssd1306 Command Line Tool for RaspberryPi.   
-It also works with OrangePi / NanoPi.   
+This may works with other boards like OrangePi/NanoPi.   
 
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/I2C Interface.  
@@ -99,12 +99,6 @@ sudo ./oled s
 |VCC|--|3.3V||
 |SCK|--|SCL|#5|
 |SDA|--|SDA|#3|
-
----
-
-# Software requirement
-
-WiringPi Library   
 
 ---
 
