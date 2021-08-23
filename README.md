@@ -5,6 +5,16 @@ It also works with OrangePi / NanoPi.
 You can operate from command line.  
 You can choose Hardware-SPI/Software-SPI/I2C Interface.  
 
+# Software requirement   
+- WiringPi Library   
+ This project uses the wiringPiSetup() function to initialize GPIOs.   
+ If you use it on a board other than the RPI board, you may need to change the WiringPi number.   
+ As far as I know, there are these libraries.   
+	- WiringPi for OrangePi   
+	- WiringPi for BananaPi   
+	- WiringPi for NanoPi   
+	- WiringPi for Pine-64   
+
 # Command line parameters
 +1 String : String for #1 line(with External Font)  
 +2 String : String for #2 line(with External Font)  
@@ -44,15 +54,15 @@ sudo ./oled s
 
 # Wire connection for Hardware SPI
 
-|OLED||RPi/OPi|
-|:-:|:-:|:-:|
-|Gnd|--|Gnd|
-|VCC|--|3.3V|
-|D0|--|SCLK(Pin#23)|
-|D1|--|MOSI(Pin#19)|
-|RES|--|GPIO18(Pin#12) (*)|
-|DC|--|GPIO17(Pin#11) (*)|
-|CS|--|CS0(Pin#24)|
+|OLED||RPi|Pin#|WiringPi#|
+|:-:|:-:|:-:|:-:|:-:|
+|Gnd|--|Gnd|||
+|VCC|--|3.3V|||
+|D0|--|SCLK|#23||
+|D1|--|MOSI|#19||
+|RES|--|GPIO18|#12|1(*)|
+|DC|--|GPIO17|#11|0(*)|
+|CS|--|CS0|#24||
 
 (*)You can change to another pin.   
 #define RST  1  // You can change   
@@ -62,15 +72,15 @@ sudo ./oled s
 
 # Wire connection for Software SPI
 
-|OLED||RPi/OPi|
-|:-:|:-:|:-:|
-|Gnd|--|Gnd|
-|VCC|--|3.3V|
-|D0|--|GPIO11(Pin#23) (*)|
-|D1|--|GPIO10(Pin#19) (*)|
-|RES|--|GPIO18(Pin#12) (*)|
-|DC|--|GPIO17(Pin#11) (*)|
-|CS|--|GPIO8(Pin#24) (*)|
+|OLED||RPi|Pin#|WiringPi#|
+|:-:|:-:|:-:|:-:|:-:|
+|Gnd|--|Gnd||||
+|VCC|--|3.3V|||
+|D0|--|SCLK|#23||14(*)|
+|D1|--|MOSI|#19||12(*)|
+|RES|--|GPIO18|#12||1(*)|
+|DC|--|GPIO17|#11||0(*)|
+|CS|--|CS0|#24|10(*)|
 
 (*)You can change to another pin.   
 #define MOSI 12 // You can change   
@@ -83,12 +93,12 @@ sudo ./oled s
 
 # Wire connection for I2C
 
-|OLED||RPi/OPi|
-|:-:|:-:|:-:|
-|Gnd|--|Gnd|
-|VCC|--|3.3V|
-|SCK|--|SCL(Pin#5)|
-|SDA|--|SDA(Pin#3)|
+|OLED||RPi|Pin#|
+|:-:|:-:|:-:|:-:|
+|Gnd|--|Gnd||
+|VCC|--|3.3V||
+|SCK|--|SCL|#5|
+|SDA|--|SDA|#3|
 
 ---
 
