@@ -393,6 +393,9 @@ void init_hardware_spi(void){
   }
 
   wiringPiSetup();
+#ifdef CS_CONTROL
+  pinMode (CS, OUTPUT) ;
+#endif
   pinMode (DC, OUTPUT) ;
   pinMode (RST, OUTPUT) ;
   wiringPiSPISetup(0, 32*1000*1000);
@@ -402,9 +405,13 @@ void init_hardware_spi(void){
   delay(50);
   digitalWrite(RST,  HIGH) ;
   digitalWrite(DC, LOW);
+#ifdef CS_CONTROL
   digitalWrite(CS, LOW);
+#endif
   wiringPiSPIDataRW(0, init_command, sizeof(init_command));
+#ifdef CS_CONTROL
   digitalWrite(CS, HIGH);
+#endif
 
 }
 
@@ -649,14 +656,22 @@ void show_hardware_spi(int page, int offset){
     page_command[1] = 0x10;
     page_command[2] = 0xB0 + _page;
     digitalWrite(DC,  LOW);
+#ifdef CS_CONTROL
     digitalWrite(CS, LOW);
+#endif
     wiringPiSPIDataRW(0, page_command, sizeof(page_command));
+#ifdef CS_CONTROL
     digitalWrite(CS, HIGH);
+#endif
 
     digitalWrite(DC,  HIGH);
+#ifdef CS_CONTROL
     digitalWrite(CS, LOW);
+#endif
     wiringPiSPIDataRW(0, &frame[_page*128], 128);
+#ifdef CS_CONTROL
     digitalWrite(CS, HIGH);
+#endif
   }
 
 #if 0
