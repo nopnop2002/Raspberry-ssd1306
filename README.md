@@ -16,14 +16,14 @@ You can choose Hardware-SPI/Software-SPI/I2C Interface.
 	- WiringPi for Pine-64   
 
 # Command line parameters
-+1 String : String for #1 line(with External Font)  
-+2 String : String for #2 line(with External Font)  
-+3 String : String for #3 line(with External Font)  
-+4 String : String for #4 line(with External Font)  
-+a String : String for #1 line(with Internal Font)  
-+b String : String for #2 line(with Internal Font)  
-+c String : String for #3 line(with Internal Font)  
-+d String : String for #4 line(with Internal Font)  
++1 String : String for #1 line(Use External Font)  
++2 String : String for #2 line(Use External Font)  
++3 String : String for #3 line(Use External Font)  
++4 String : String for #4 line(Use External Font)  
++a String : String for #1 line(Use Internal Font)  
++b String : String for #2 line(Use Internal Font)  
++c String : String for #3 line(Use Internal Font)  
++d String : String for #4 line(Use Internal Font)  
 -1 : delete #1 line  
 -2 : delete #2 line  
 -3 : delete #3 line  
