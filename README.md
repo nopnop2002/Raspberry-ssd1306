@@ -206,42 +206,77 @@ Left:1.3 inch SH1106
 Right:0.96 inch SSD1306   
 ![OLED-SH1106](https://user-images.githubusercontent.com/6020549/106369513-8b1ad300-6395-11eb-9653-26b470829de2.JPG)
 
----
 
-# Change font style   
-You can choose the font style.   
-Please change here.   
+# Font File   
+This tool uses the following as default fonts:   
+- fontx/ILGH16XB.FNT // 8x16Dot Gothic
+- fontx/ILMH16XB.FNT // 8x16Dot Mincyo
 
+Changing this file will change the font.
 ```
   // You can change font file
   Fontx_init(fx,"./fontx/ILGH16XB.FNT","./fontx/ILGZ16XB.FNT"); // 16Dot Gothic
-//  Fontx_init(fx,"./fontx/ILMH16XB.FNT","./fontx/ILMZ16XB.FNT"); // 16Dot Mincyo
+  //Fontx_init(fx,"./fontx/ILMH16XB.FNT","./fontx/ILMZ16XB.FNT"); // 16Dot Mincyo
 ```
 
----
-
-# Font File   
 You can add your original fonts.   
 The format of the font file is the FONTX format.   
 Your font file is put in fontx directory.   
 
 Please refer [this](http://elm-chan.org/docs/dosv/fontx_e.html) page about FONTX format.   
 
----
-
 # Font File Editor(FONTX Editor)   
 [There](http://elm-chan.org/fsw/fontxedit.zip) is a font file editor.   
 This can be done on Windows 10.   
 Developer page is [here](http://elm-chan.org/fsw_e.html).   
 
-![FontxEditor](https://user-images.githubusercontent.com/6020549/78731275-3b889800-797a-11ea-81ba-096dbf07c4b8.png)
+![fontx-editor-1](https://github.com/user-attachments/assets/76a8c96f-74c3-4583-a4f1-5664f0e81f3a)
 
 
-This tool uses the following as default fonts:   
-- fontx/ILGH16XB.FNT // 8x16Dot Gothic
-- fontx/ILMH16XB.FNT // 8x16Dot Mincyo
+# Convert from TTF font to FONTX font  
+step1)   
+Download WFONTX64.exe from [here](https://github.com/nemuisan/WFONTX64/releases).
+Developer page is [here](https://github.com/nemuisan/WFONTX64).   
 
-Changing this file will change the font.
+step2)   
+Select ttf font.   
+___Please note that if you select a proportional font, some fonts may not convert correctly.___   
+If you select a proportional font, some fonts will need to be modified using fontxedit.exe.   
+Monospaced fonts can be converted correctly.   
+![Algerian16-1](https://github.com/user-attachments/assets/cb8b0d4b-fe91-420c-8778-6f7a044ca78a)
+
+step3)   
+Enter Height, Width, FontX2 name.   
+Specify half of Height for Width.   
+Specify your favorite font name in the FontX2 name field using up to 8 characters.   
+![Algerian16-2](https://github.com/user-attachments/assets/57035c25-2337-45c8-839a-0310410e6c01)
+
+
+step4)   
+Specify the file name to save.   
+![Algerian16-3](https://github.com/user-attachments/assets/face29c3-1cf6-4e9c-85c0-7dfc9bcf3aad)
+
+step5)   
+Specify the font style as required.   
+![Algerian16-4](https://github.com/user-attachments/assets/8e8a13e5-5283-4341-8ef4-2292650afab1)
+
+step6)   
+Press the RUN button to convert TTF fonts to FONTX format.   
+![Algerian16-5](https://github.com/user-attachments/assets/cc36c27d-6eb2-4286-8870-33c393dad9c8)
+
+step7)   
+upload your font file to $HOME/Raspberry-ssd1306/fontx directory.   
+
+step8)   
+add font to use   
+```
+  // You can change font file
+  //Fontx_init(fx,"./fontx/ILGH16XB.FNT","./fontx/ILGZ16XB.FNT"); // 16Dot Gothic
+  //Fontx_init(fx,"./fontx/ILMH16XB.FNT","./fontx/ILMZ16XB.FNT"); // 16Dot Mincyo
+  Fontx_init(fx,"./fontx/Algerian16.FNT",""); // 16Dot Algerian
+```
+
+![Algerian16-6](https://github.com/user-attachments/assets/02ab15da-9561-4732-99ce-7662ce0d5449)
 
 ---
 
