@@ -276,7 +276,7 @@ add font to use
   Fontx_init(fx,"./fontx/Algerian16.FNT",""); // 16Dot Algerian
 ```
 
-![Algerian16-6](https://github.com/user-attachments/assets/02ab15da-9561-4732-99ce-7662ce0d5449)
+![Algerian16-6](https://github.com/user-attachments/assets/9d5e1432-bb01-4571-a085-e86a62bfe24f)
 
 ---
 
